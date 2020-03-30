@@ -1,4 +1,4 @@
-import { ReactNode, ChangeEventHandler } from 'react';
+import { ReactNode, ChangeEventHandler, SyntheticEvent } from 'react';
 
 export interface HasChildren {
     children?: ReactNode
@@ -14,4 +14,16 @@ export interface Button {
     size?: 'small' | 'medium',
     before?: ReactNode,
     disabled?: boolean
+}
+
+export interface Panel {
+    id: string
+}
+
+export interface PanelPrimary extends Panel {
+    goForward(e: SyntheticEvent<HTMLElement>): void
+}
+
+export interface PanelSecondary extends Panel {
+    goBack(): void
 }
