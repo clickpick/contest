@@ -4,7 +4,7 @@ import { PanelPrimary } from '../types/props';
 
 import { Panel, PanelHeaderSimple } from '@vkontakte/vkui';
 
-const Vote2: FC<PanelPrimary> = ({ id }: PanelPrimary) => {
+const Home: FC<PanelPrimary> = ({ id }: PanelPrimary) => {
 
     return (
         <Panel id={id} separator={false}>
@@ -14,4 +14,4 @@ const Vote2: FC<PanelPrimary> = ({ id }: PanelPrimary) => {
     );
 };
 
-export default Vote2;
+export default Home;
