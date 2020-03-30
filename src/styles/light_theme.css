@@ -20,7 +20,7 @@ body[scheme="bright_light"] {
     --success-secondary: rgba(63, 164, 75, 0.1);
 
     /* Surface */
-    --background: #F7F7F7;
+    --background: #FFF;
     --surface: #FFF;
     --accent: rgba(0, 0, 0, 0.03);
     --blur-overlay: rgba(255, 255, 255, 0.7);
