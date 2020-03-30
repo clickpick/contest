@@ -1,0 +1,27 @@
+.Group {
+    display: flex;
+}
+
+.Group--vertical {
+    flex-direction: column;
+}
+
+.Group--jc-center {
+    justify-content: center;
+}
+
+.Group--center {
+    align-items: center;
+}
+
+.Group--start {
+    align-items: flex-start;
+}
+
+.Group--end {
+    align-items: flex-end;
+}
+
+.Group--shrink > * {
+    flex-shrink: 0;
+}
