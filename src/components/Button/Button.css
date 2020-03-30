@@ -1,0 +1,191 @@
+.Button {
+    position: relative;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 270px;
+
+    border: none;
+    border-radius: 4px;
+
+    font-size: 14px; /* fallback */
+    font-size: var(--font-size-14);
+    font-weight: 500; /* fallback */
+    font-weight: var(--font-weight-medium);
+    line-height: 20px;
+
+    cursor: pointer;
+}
+
+@media (min-width: 600px) {
+    .Button {
+        width: auto;
+    }
+}
+
+.Button::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+    content: '';
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 4px;
+
+    opacity: 0;
+
+    transition: opacity 150ms ease-in;
+}
+
+.Button[disabled] {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.Button:not([disabled]):hover::before {
+    opacity: 0.1;
+}
+
+.Button:not([disabled]):active::before {
+    opacity: 0.2;
+}
+
+.Button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Priorities */
+.Button--primary {
+    background-color: #456BF1; /* fallback */
+    background-color: var(--button_primary_background);
+    color: #FFF; /* fallback */
+    color: var(--button_primary_color);
+}
+
+.Button--primary::before {
+    background-color: #FFF; /* fallback */
+    background-color: var(--button_primary_before_background);
+}
+
+.Button--primary svg {
+    fill: #FFF; /* fallback */
+    fill: var(--button_primary_color);;
+}
+
+.Button--secondary {
+    background-color: rgba(255, 255, 255, 0.1); /* fallback */
+    background-color: var(--button_secondary_background);
+    color: #456BF1; /* fallback */
+    color: var(--button_secondary_color);
+}
+
+.Button--secondary.Button--unselect {
+    background-color: rgba(255, 255, 255, 0.05); /* fallback */
+    background-color: var(--button_secondary-unselect_background);
+}
+
+.Button--secondary::before {
+    background-color: #456BF1; /* fallback */
+    background-color: var(--button_secondary_before_background);
+}
+
+.Button--secondary svg {
+    fill: #456BF1; /* fallback */
+    fill: var(--button_secondary_color);
+}
+
+.Button--secondary:not([disabled]):active::before {
+    opacity: 0.15;
+}
+
+.Button--tertiary {
+    background-color: #FFF; /* fallback */
+    background-color: var(--button_tertiary_background);
+    color: #456BF1; /* fallback */
+    color: var(--button_tertiary_color);
+}
+
+.Button--tertiary::before {
+    background-color: #456BF1; /* fallback */
+    background-color: var(--button_tertiary_before_background);
+}
+
+.Button--tertiary svg {
+    fill: #456BF1; /* fallback */
+    fill: var(--button_tertiary_color);;
+}
+
+.Button--tertiary:not([disabled]):hover::before {
+    opacity: 0.05;
+}
+
+.Button--tertiary:not([disabled]):active::before {
+    opacity: 0.10;
+}
+
+.Button--unselect {
+    color: rgba(0, 0, 0, 0.3); /* fallback */
+    color: var(--button_unselect_color);
+}
+
+.Button--unselect::before {
+    background-color: #000; /* fallback */
+    background-color: var(--button_unselect_before_background);
+}
+
+.Button--unselect svg {
+    fill: rgba(0, 0, 0, 0.3); /* fallback */
+    fill: var(--button_unselect_color);
+}
+
+.Button--unselect:not([disabled]):hover::before {
+    opacity: 0.05;
+}
+
+.Button--unselect:not([disabled]):active::before {
+    opacity: 0.1;
+}
+
+/* ––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Shapes */
+.Button--circle {
+    width: 52px;
+    height: 52px;
+}
+
+.Button--circle,
+.Button--circle::before {
+    border-radius: 50%;
+}
+
+.Button--circle::before {
+    background-color: var(--button_circle_before_background);
+}
+
+/* ––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* For before content */
+.Button__before {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* ––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Sizes */
+.Button--small {
+    width: auto;
+}
+
+.Button--small svg {
+    width: 16px;
+    height: 16px;
+}

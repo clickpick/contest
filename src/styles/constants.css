@@ -1,0 +1,84 @@
+:root {
+    /* Colors */
+    --white: 255, 255, 255;
+    --black: 0, 0, 0;
+    --black-secondary: 23, 23, 32; /* #171717 */
+    --gray: 55, 55, 55;            /* #373737 */
+    --red: 255, 47, 47;            /* #E12F2F */
+    --green: 63, 164, 75;          /* #3FA44B */
+    --blue: 69, 107, 241;          /* #456BF1 */
+
+    /* Fonts */
+    --font-size-12: 12px;
+    --font-size-14: 14px;
+    --font-size-16: 16px;
+    --font-size-30: 30px;
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+}
+
+body {
+    /* Avatar */
+    --avatar_background: var(--os-tertiary);
+
+    /* Button */
+    --button_primary_background: var(--primary);
+    --button_primary_before_background: var(--op-primary);
+    --button_primary_color: var(--op-primary);
+
+    --button_secondary_background: var(--secondary);
+    --button_secondary_before_background: var(--primary);
+    --button_secondary_color: var(--primary);
+
+    --button_tertiary_background: var(--background);
+    --button_tertiary_before_background: var(--primary);
+    --button_tertiary_color: var(--primary);
+
+    --button_circle_before_background: var(--primary);
+
+    --button_unselect_color: var(--os-tertiary);
+    --button_unselect_before_background: var(--reply);
+    --button_secondary-unselect_background: var(--accent);
+
+    /* Checkbox */
+    --checkbox-color: var(--color);
+
+    /* Cell */
+    --cell_primary-color: var(--os-primary);
+    --cell_secondary-color: var(--os-secondary);
+
+    /* Subtask */
+    --subtask_background: var(--surface);
+
+    /* TaskCell */
+    --task-cell-color: var(--color);
+    --task-cell_background: var(--surface);
+
+    /* Textarea */
+    --textarea_placeholder: rgba(var(--color), 0.4);
+
+    /* TextFiled */
+    --text-field_default_label-color: var(--os-secondary);
+    --text-field_default_label-focus-color: var(--primary);
+    --text-field_default_label-tertiary-color: var(--os-tertiary);
+
+    --text-field_default_body-background: var(--accent);
+    --text-field_default_body-focused-background: var(--secondary);
+    --text-field_default_body-error-background: var(--error-secondary);
+
+    --text-field_counter-color: var(--os-tertiary);
+    --text-field_counter-max-color: var(--error);
+
+    --text-field_hint-error-color: var(--error);
+
+    /* Modal */
+    --modal_blur-fallback: var(--blur-overlay-fallback);
+    --modal_background: var(--blur-overlay);
+    
+
+    /* ––––––––––––––––––––––––––––––––––––––––––––––– */
+
+    background-color: var(--surface);
+    color: rgb(var(--color));
+}
