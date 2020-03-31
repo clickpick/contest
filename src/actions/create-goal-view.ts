@@ -11,7 +11,7 @@ export const setPanel = (activePanel: CreateGoalPanels, history: Array<string>) 
 });
 
 export const goForward = (e: SyntheticEvent<HTMLElement>) => (dispath: any, goState: any) => {
-    const { mainView: { activePanel, history } } = goState();
+    const { createGoalView: { activePanel, history } } = goState();
 
     if (!(e.currentTarget instanceof HTMLElement)) {
         return;
@@ -27,7 +27,7 @@ export const goForward = (e: SyntheticEvent<HTMLElement>) => (dispath: any, goSt
 };
 
 export const goBack = () => (dispath: any, goState: any) => {
-    const { mainView: { history } } = goState();
+    const { createGoalView: { history } } = goState();        
 
     if (history.length === 1) {
         disableSwipeBack();
