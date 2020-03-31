@@ -1,0 +1,11 @@
+.Emoji {
+    line-height: 1;
+}
+
+.Emoji--medium {
+    font-size: 42px;
+}
+
+.Emoji--large {
+    font-size: 62px;
+}
