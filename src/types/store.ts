@@ -6,6 +6,8 @@ export enum ActionTypes {
     GOALS_REQUEST = 'GOALS_REQUEST',
     GOALS_SUCCESS = 'GOALS_SUCCESS',
     GOALS_FAILURE = 'GOALS_FAILURE',
+
+    SET_MAIN_VIEW_PANEL = 'SET_MAIN_VIEW_PANEL',
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -28,6 +30,12 @@ export interface Action {
 /**
  * State
  */
+
+/* View */
+export interface View<P> {
+    readonly activePanel: P,
+    readonly history: Array<string>
+}
 
 /* User */
 export interface User {
@@ -63,6 +71,13 @@ export interface GoalsState extends DataState {
 /**
  * Actions
  */
+
+/* View */
+interface SetPanel<T, P> extends View<P> {
+    type: T
+}
+
+export interface SetMainViewPanel<P> extends SetPanel<ActionTypes.SET_MAIN_VIEW_PANEL, P> { }
 
 /* User */
 export interface UserAuthLoad {

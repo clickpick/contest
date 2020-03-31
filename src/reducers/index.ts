@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import user from './user';
-import goals from './goals';
+import mainView, { mainViewInitialState } from './main-view';
+import user, { userInitialState } from './user';
+import goals, { goalsInitialState } from './goals';
 
 const rootReducer = combineReducers({
+    mainView,
     user,
     goals
 });
@@ -12,5 +14,8 @@ export default rootReducer;
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-export { userInitialState } from './user';
-export { goalsInitialState } from './goals';
+export const initialStore: AppState = {
+    mainView: mainViewInitialState,
+    user: userInitialState,
+    goals: goalsInitialState
+};
