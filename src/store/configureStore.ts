@@ -2,10 +2,11 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import api from '../middleware/api';
-import rootReducer, { AppState, userInitialState } from '../reducers';
+import rootReducer, { AppState, userInitialState, goalsInitialState } from '../reducers';
 
 export const initialStore: AppState = {
     user: userInitialState,
+    goals: goalsInitialState
 };
 
 const composeEnhancers = composeWithDevTools({
