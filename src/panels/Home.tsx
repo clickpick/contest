@@ -11,7 +11,11 @@ import { Panel, PanelHeaderSimple, Avatar, HorizontalScroll } from '@vkontakte/v
 import Group from '../components/Group';
 import Button from '../components/Button';
 
-const Home: FC<PanelPrimary> = ({ id, goForward }: PanelPrimary) => {
+export interface HomeProps extends PanelPrimary {
+    createGoal(): void
+}
+
+const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
     const { pending, data } = useUser();
     const { goalIds, goals } = useGoals();
 
@@ -75,6 +79,7 @@ const Home: FC<PanelPrimary> = ({ id, goForward }: PanelPrimary) => {
         <Panel id={id} separator={false}>
             <PanelHeaderSimple left={avatarView} separator={false} />
             {goalsView}
+            <Button children="create" onClick={createGoal} />
         </Panel>
     );
 };

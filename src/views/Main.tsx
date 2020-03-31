@@ -10,10 +10,11 @@ import Home from '../panels/Home';
 import Profile from '../panels/Profile';
 
 export interface MainProps {
-    id: string
+    id: string,
+    createGoal(): void
 }
 
-const Main: FC<MainProps> = ({ id }: MainProps) => {
+const Main: FC<MainProps> = ({ id, createGoal }: MainProps) => {
     const mainView = useMainView();
 
     return (
@@ -23,7 +24,7 @@ const Main: FC<MainProps> = ({ id }: MainProps) => {
             history={mainView.history}
             header={false}
             onSwipeBack={mainView.goBack}>
-            <Home id={MainPanels.HOME} goForward={mainView.goForward} />
+            <Home id={MainPanels.HOME} goForward={mainView.goForward} createGoal={createGoal} />
             <Profile id={MainPanels.PROFILE} goBack={mainView.goBack} />
         </View>
     );

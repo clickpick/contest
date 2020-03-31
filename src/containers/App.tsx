@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 
 import '../styles/style.css';
 
@@ -7,8 +7,14 @@ import useGoals from '../hooks/use-goals';
 
 import { ConfigProvider, Root } from '@vkontakte/vkui';
 import Main from '../views/Main';
+import CreateGoal from '../views/CreateGoal';
 
 const App: FC = () => {
+    const [activeView, setActiveView] = useState<string>('main');
+
+    const createGoal = useCallback(() => setActiveView('create-goal'), []);
+    const goMain = useCallback(() => setActiveView('main'), []);
+
     const { auth } = useUser();
     const { fetchGoals } = useGoals();
 
@@ -19,8 +25,9 @@ const App: FC = () => {
 
     return (
         <ConfigProvider isWebView={true}>
-            <Root activeView="main">
-                <Main id="main" />
+            <Root activeView={activeView}>
+                <Main id="main" createGoal={createGoal} />
+                <CreateGoal id="create-goal" goMain={goMain} />
             </Root>
         </ConfigProvider>
     );
