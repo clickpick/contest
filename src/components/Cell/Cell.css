@@ -1,0 +1,58 @@
+.Cell {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: flex-start;
+}
+
+.Cell--h-center {
+    align-items: center;
+}
+
+.Cell__before {
+    flex-shrink: 0;
+}
+
+.Cell__main {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.Cell__header,
+.Cell__description,
+.Cell__hint {
+    color: rgba(0, 0, 0, 0.6); /* fallback */
+    color: var(--cell_secondary-color);
+}
+
+.Cell__children,
+.Cell__description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.Cell__children {
+    color: rgba(0, 0, 0, 0.9); /* fallback */
+    color: var(--cell_primary-color);
+}
+
+.Cell__aside {
+    flex-shrink: 0;
+
+    display: inline-flex;
+    justify-content: center;
+}
+
+.Cell--multiline .Cell__children,
+.Cell--multiline .Cell__description {    
+    white-space: normal;
+}
+
+/* Sizes */
+.Cell--small .Cell__aside {
+    height: 20px;
+}
+
+.Cell--medium .Cell__aside {
+    height: 36px;
+}

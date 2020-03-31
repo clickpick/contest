@@ -20,9 +20,6 @@
 }
 
 body {
-    /* Avatar */
-    --avatar_background: var(--os-tertiary);
-
     /* Button */
     --button_primary_background: var(--primary);
     --button_primary_before_background: var(--op-primary);
@@ -40,46 +37,14 @@ body {
 
     --button_unselect_color: var(--os-tertiary);
     --button_unselect_before_background: var(--reply);
-    --button_secondary-unselect_background: var(--accent);
-
-    /* Checkbox */
-    --checkbox-color: var(--color);
+    --button_secondary-unselect_background: var(--accent);    
 
     /* Cell */
     --cell_primary-color: var(--os-primary);
     --cell_secondary-color: var(--os-secondary);
 
-    /* Subtask */
-    --subtask_background: var(--surface);
-
-    /* TaskCell */
-    --task-cell-color: var(--color);
-    --task-cell_background: var(--surface);
-
-    /* Textarea */
-    --textarea_placeholder: rgba(var(--color), 0.4);
-
-    /* TextFiled */
-    --text-field_default_label-color: var(--os-secondary);
-    --text-field_default_label-focus-color: var(--primary);
-    --text-field_default_label-tertiary-color: var(--os-tertiary);
-
-    --text-field_default_body-background: var(--accent);
-    --text-field_default_body-focused-background: var(--secondary);
-    --text-field_default_body-error-background: var(--error-secondary);
-
-    --text-field_counter-color: var(--os-tertiary);
-    --text-field_counter-max-color: var(--error);
-
-    --text-field_hint-error-color: var(--error);
-
-    /* Modal */
-    --modal_blur-fallback: var(--blur-overlay-fallback);
-    --modal_background: var(--blur-overlay);
-    
-
     /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
-    background-color: var(--surface);
+    background-color: var(--background);
     color: rgb(var(--color));
 }
