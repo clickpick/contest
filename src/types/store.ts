@@ -27,11 +27,12 @@ export interface Action {
 
 /* User */
 export interface User {
-    readonly vkUserId: number,
+    readonly id: number,
+    readonly firstName: string,
+    readonly lastName: string,
+    readonly avatar200: string,
     readonly messagesAreEnabled: boolean,
     readonly notificationsAreEnabled: boolean,
-    readonly successfulPolls: Array<{ id: number }>,
-    readonly hasPresent: boolean
 }
 
 export interface UserState extends DataState {
