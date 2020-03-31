@@ -8,6 +8,7 @@ export enum ActionTypes {
     GOALS_FAILURE = 'GOALS_FAILURE',
 
     SET_MAIN_VIEW_PANEL = 'SET_MAIN_VIEW_PANEL',
+    SET_CREATE_GOAL_PANEL = 'SET_CREATE_GOAL_PANEL',
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -78,6 +79,8 @@ interface SetPanel<T, P> extends View<P> {
 }
 
 export interface SetMainViewPanel<P> extends SetPanel<ActionTypes.SET_MAIN_VIEW_PANEL, P> { }
+
+export interface SetCreateGoalPanel<P> extends SetPanel<ActionTypes.SET_CREATE_GOAL_PANEL, P> { }
 
 /* User */
 export interface UserAuthLoad {
