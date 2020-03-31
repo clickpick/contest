@@ -22,7 +22,7 @@ export const goalsInitialState: GoalsState = {
 function goalIds(state = initialGoalIds, action: GoalsReducerActions): GoalIds {
     switch (action.type) {
         case ActionTypes.GOALS_SUCCESS:
-            return state;
+            return action.payload.result;
         default:
             return state;
     }
@@ -31,7 +31,7 @@ function goalIds(state = initialGoalIds, action: GoalsReducerActions): GoalIds {
 function goals(state = initialGoals, action: GoalsReducerActions): Goals {
     switch (action.type) {
         case ActionTypes.GOALS_SUCCESS:
-            return state;
+            return action.payload.entities.goals;
         default:
             return state;
     }

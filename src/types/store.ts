@@ -86,7 +86,10 @@ export interface GoalsLoad {
 
 export interface GoalsSuccess {
     type: ActionTypes.GOALS_SUCCESS,
-    payload: { result: User }
+    payload: {
+        entities: { goals: Goals },
+        result: IdsArray
+    }
 }
 
 export interface GoalsFailure {
