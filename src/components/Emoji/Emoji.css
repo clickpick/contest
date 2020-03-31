@@ -1,9 +1,10 @@
 .Emoji {
+    font-size: 16px;
     line-height: 1;
 }
 
 .Emoji--medium {
-    font-size: 42px;
+    font-size: 30px;
 }
 
 .Emoji--large {
