@@ -2,6 +2,7 @@ import React, { FC, useState, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
 import { PanelPrimary } from '../types/props';
+import { MainPanels } from '../types/panels';
 
 import useUser from '../hooks/use-user';
 import useGoals from '../hooks/use-goals';
@@ -10,7 +11,7 @@ import { Panel, PanelHeaderSimple, Avatar, HorizontalScroll } from '@vkontakte/v
 import Group from '../components/Group';
 import Button from '../components/Button';
 
-const Home: FC<PanelPrimary> = ({ id }: PanelPrimary) => {
+const Home: FC<PanelPrimary> = ({ id, goForward }: PanelPrimary) => {
     const { pending, data } = useUser();
     const { goalIds, goals } = useGoals();
 
@@ -18,8 +19,10 @@ const Home: FC<PanelPrimary> = ({ id }: PanelPrimary) => {
         <Avatar
             className="margin-purple--left"
             size={32}
-            src={data.avatar200} />,
-        [pending, data]);
+            src={data.avatar200}
+            data-to={MainPanels.PROFILE}
+            onClick={goForward} />,
+        [pending, data, goForward]);
 
     const [selectedGoalId, setGoalId] = useState<number | null>(null);
 
