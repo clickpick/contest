@@ -1,3 +1,4 @@
 export enum MainPanels {
-    HOME = 'home'
+    HOME = 'home',
+    PROFILE = 'profile',
 }
