@@ -11,3 +11,8 @@ export const setViewSettings = (statusBarStyle: 'light' | 'dark', actionBar = '#
             navigation_bar_color: navigationBar
         }
     );
+
+export const enableSwipeBack = () => bridge.send('VKWebAppEnableSwipeBack');
+export const disableSwipeBack = () => bridge.send('VKWebAppDisableSwipeBack');
+
+export const closeApp = () => bridge.send('VKWebAppClose', { status: 'success' });
