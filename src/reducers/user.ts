@@ -1,6 +1,8 @@
+import { createSelector } from 'reselect';
+import { getEntitiesStartedGoalsSelector } from './started-goals';
 import {
     ActionTypes,
-    User, UserState,
+    User, UserState, Goals,
     UserAuthLoad, UserAuthSuccess, UserAuthFailure, StartedGoalCreated
 } from '../types/store';
 import { AppState } from './index';
@@ -40,3 +42,11 @@ export default function userReducer(state = userInitialState, action: UserReduce
 
 // Selectors
 export const getUserSelector = (state: AppState) => state.user;
+export const getUserDataWithSelectedGoalSelector = createSelector<AppState, Goals, User | null, any>(
+    [getEntitiesStartedGoalsSelector, (state: AppState): User | null => state.user.data],
+    (goals, data) => data && { ...data, selectedGoal: data.startedGoalId && goals[data.startedGoalId] }
+);
+export const getUserWithStartedGoalSelected = createSelector(
+    [getUserDataWithSelectedGoalSelector, getUserSelector],
+    (data, state) => ({ ...state, data })
+);
