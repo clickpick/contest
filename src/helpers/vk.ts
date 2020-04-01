@@ -1,4 +1,5 @@
 import bridge from '@vkontakte/vk-bridge';
+import { Links } from '../config';
 
 export const init = () => bridge.send('VKWebAppInit');
 
@@ -16,3 +17,15 @@ export const enableSwipeBack = () => bridge.send('VKWebAppEnableSwipeBack');
 export const disableSwipeBack = () => bridge.send('VKWebAppDisableSwipeBack');
 
 export const closeApp = () => bridge.send('VKWebAppClose', { status: 'success' });
+
+export const showStoryBox = (bg: string) =>
+    bridge.send('VKWebAppShowStoryBox', {
+        background_type: 'image',
+        url: bg,
+        locked: true,
+        attachment: {
+            text: 'Поставить цель',
+            type: 'url',
+            url: Links.APP,
+        },
+    });
