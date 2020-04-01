@@ -87,6 +87,7 @@ export interface StartedGoal {
     readonly score: number,
     readonly likesCount: number,
     readonly photosCount: number,
+    readonly comment: string,
     readonly globalTop: number,
     readonly goalTop: number,
     readonly isLiked: boolean,
@@ -96,7 +97,7 @@ export interface StartedGoal {
         id: number,
         link: string,
         createdAt: string
-    } | undefined
+    } | null
 }
 
 export interface StartedGoalWithGoal extends StartedGoal {
