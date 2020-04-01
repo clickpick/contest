@@ -1,9 +1,10 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useState, useMemo, useCallback } from 'react';
 
 import { PanelSecondary } from '../types/props';
 
 import useGoals from '../hooks/use-goals';
 import useChange from '../hooks/use-change';
+import useStartedGoals from '../hooks/use-started-goals';
 
 import { Panel, PanelHeaderSimple, PanelHeaderBack, FixedLayout } from '@vkontakte/vkui';
 import Group from '../components/Group';
@@ -14,12 +15,28 @@ import TextField from '../components/TextField';
 import Button from '../components/Button';
 
 export interface CreateGoalFinishProps extends PanelSecondary {
-    goalId: number | null
+    goalId: number | null,
+    startGoal(comment: string): void
 }
 
-const CreateGoalFinish: FC<CreateGoalFinishProps> = ({ id, goalId, goBack }: CreateGoalFinishProps) => {
+const CreateGoalFinish: FC<CreateGoalFinishProps> = ({ id, goalId, goBack, startGoal }: CreateGoalFinishProps) => {
     const { goals } = useGoals();
-    const comment = useChange();
+    const [commentError, setCommentError] = useState<string | undefined>(undefined);
+    const resetCommentError = useCallback(() => setCommentError(undefined), []);
+    const comment = useChange(undefined, resetCommentError);
+
+    const { pending: disabled } = useStartedGoals();
+
+    const handleSubmit = useCallback(() => {
+        const value = comment.value.trim();
+
+        if (value.length === 0) {
+            setCommentError('Введите комментарий');
+            return;
+        }
+
+        startGoal(value);
+    }, [comment.value, startGoal]);
 
     const bodyView = useMemo(() => (!!goalId) &&
         <>
@@ -38,15 +55,18 @@ const CreateGoalFinish: FC<CreateGoalFinishProps> = ({ id, goalId, goBack }: Cre
             <TextField
                 view="promo"
                 placeholder="Краткое описание"
-                {...comment} />
+                {...comment}
+                error={!!commentError}
+                hint={commentError} />
             <FixedLayout vertical="bottom">
                 <Group jcCenter className="margin-pink--bottom">
                     <Button
                         children="Поставить себе эту цель"
-                        disabled={!comment.value.trim()} />
+                        disabled={!comment.value.trim() || disabled}
+                        onClick={handleSubmit} />
                 </Group>
             </FixedLayout>
-        </>, [goalId, goals, comment]);
+        </>, [goalId, goals, comment, commentError, disabled, handleSubmit]);
 
     return (
         <Panel id={id} separator={false}>

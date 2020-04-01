@@ -1,8 +1,10 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useState, useCallback, useEffect } from 'react';
 
 import { CreateGoalPanels } from '../types/panels';
 
 import useCreateGoalView from '../hooks/use-create-goal-view';
+import useStartedGoals from '../hooks/use-started-goals';
+import useUser from '../hooks/use-user';
 
 import { View } from '@vkontakte/vkui';
 
@@ -14,8 +16,10 @@ export interface CreateGoalProps {
     goMain(): void
 }
 
-const CreateGoal: FC<CreateGoalProps> = ({ id }: CreateGoalProps) => {
+const CreateGoal: FC<CreateGoalProps> = ({ id, goMain }: CreateGoalProps) => {
     const createGoalView = useCreateGoalView();
+    const { createGoal } = useStartedGoals();
+    const { data: user } = useUser();
 
     const [selectedGoalId, setGoalId] = useState<number | null>(null);
 
@@ -28,9 +32,21 @@ const CreateGoal: FC<CreateGoalProps> = ({ id }: CreateGoalProps) => {
 
         setGoalId(goalId);
         createGoalView.goForward(e);
-        console.log(e.target.dataset);
-
     }, [createGoalView]);
+
+    const startGoal = useCallback((comment: string) => {
+        if (!selectedGoalId) {
+            return;
+        }
+
+        createGoal(selectedGoalId, comment);
+    }, [selectedGoalId, createGoal]);
+
+    useEffect(() => {
+        if (user?.startedGoalId !== false) {
+            goMain();
+        }
+    }, [user, goMain]);
 
     return (
         <View
@@ -46,7 +62,8 @@ const CreateGoal: FC<CreateGoalProps> = ({ id }: CreateGoalProps) => {
             <CreateGoalFinish
                 id={CreateGoalPanels.FINISH}
                 goalId={selectedGoalId}
-                goBack={createGoalView.goBack} />
+                goBack={createGoalView.goBack}
+                startGoal={startGoal} />
         </View>
     );
 };
