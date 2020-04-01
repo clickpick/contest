@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 
 import { CreateGoalPanels } from '../types/panels';
 
@@ -17,8 +17,20 @@ export interface CreateGoalProps {
 const CreateGoal: FC<CreateGoalProps> = ({ id }: CreateGoalProps) => {
     const createGoalView = useCreateGoalView();
 
-    console.log(createGoalView);
+    const [selectedGoalId, setGoalId] = useState<number | null>(null);
 
+    const setGoal = useCallback((e: any) => {
+        const goalId = Number(e.target.dataset.goalId);
+
+        if (!goalId) {
+            return;
+        }
+
+        setGoalId(goalId);
+        createGoalView.goForward(e);
+        console.log(e.target.dataset);
+
+    }, [createGoalView]);
 
     return (
         <View
@@ -27,8 +39,14 @@ const CreateGoal: FC<CreateGoalProps> = ({ id }: CreateGoalProps) => {
             history={createGoalView.history}
             header={false}
             onSwipeBack={createGoalView.goBack}>
-            <CreateGoalStart id={CreateGoalPanels.START} goForward={createGoalView.goForward} />
-            <CreateGoalFinish id={CreateGoalPanels.FINISH} goBack={createGoalView.goBack} />
+            <CreateGoalStart
+                id={CreateGoalPanels.START}
+                goForward={createGoalView.goForward}
+                setGoal={setGoal} />
+            <CreateGoalFinish
+                id={CreateGoalPanels.FINISH}
+                goalId={selectedGoalId}
+                goBack={createGoalView.goBack} />
         </View>
     );
 };
