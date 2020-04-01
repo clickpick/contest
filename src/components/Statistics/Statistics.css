@@ -1,0 +1,9 @@
+.Statistics__item {
+    min-width: 114px;
+}
+
+.Statistics__value {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--primary);
+}
