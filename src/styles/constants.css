@@ -37,7 +37,11 @@ body {
 
     --button_unselect_color: var(--os-tertiary);
     --button_unselect_before_background: var(--reply);
-    --button_secondary-unselect_background: var(--accent);    
+    --button_secondary-unselect_background: var(--accent);
+
+    /* Card */
+    --card_primary-background: var(--secondary);
+    --card_secondary-background: var(--accent);
 
     /* Cell */
     --cell_primary-color: var(--os-primary);
