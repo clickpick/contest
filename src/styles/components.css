@@ -5,6 +5,8 @@
 
 @import '../components/Button/Button.css';
 
+@import '../components/Photo/Photo.css';
+
 @import '../components/Headline/Headline.css';
 @import '../components/Title/Title.css';
 @import '../components/Footnote/Footnote.css';

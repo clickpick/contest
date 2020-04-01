@@ -1,0 +1,13 @@
+.Photo {
+    width: 100%;
+    min-height: 320px;
+
+    background-size: cover;
+    background-position: center;
+}
+
+.Photo::after {
+    display: block;
+    content: '';
+    padding-bottom: 100%;
+}
