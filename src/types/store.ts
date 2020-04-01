@@ -83,7 +83,7 @@ export interface StartedGoal {
     readonly goalTop: number,
     readonly isLiked: boolean,
     readonly user: User,
-    readonly goal: Goal,
+    readonly goalId: number,
     readonly photo: {
         id: number,
         link: string,
