@@ -14,6 +14,8 @@ export enum ActionTypes {
     STARTED_GOALS_SUCCESS = 'STARTED_GOALS_SUCCESS',
     STARTED_GOALS_FAILURE = 'STARTED_GOALS_FAILURE',
     STARTED_GOALS_CREATED = 'STARTED_GOALS_CREATED',
+
+    STARTED_GOALS_PHOTO_LOADED = 'STARTED_GOALS_PHOTO_LOADED'
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -82,6 +84,12 @@ export interface GoalsState extends DataState {
     readonly goals: Goals
 }
 
+export interface Photo {
+    id: number,
+    link: string,
+    createdAt: string
+}
+
 /* StartedGoals */
 export interface StartedGoal {
     readonly id: number,
@@ -92,13 +100,10 @@ export interface StartedGoal {
     readonly globalTop: number,
     readonly goalTop: number,
     readonly isLiked: boolean,
+    readonly needPhoto: boolean,
     readonly user: User,
     readonly goalId: number,
-    readonly photo: {
-        id: number,
-        link: string,
-        createdAt: string
-    } | null
+    readonly photo: Photo | null
 }
 
 export interface StartedGoalWithGoal extends StartedGoal {
@@ -190,5 +195,13 @@ export interface StartedGoalCreated {
     payload: {
         entities: { startedGoals: StartedGoals },
         result: number
+    }
+}
+
+export interface StartedGoalsPhotoLoaded {
+    type: ActionTypes.STARTED_GOALS_PHOTO_LOADED,
+    payload: { result: Photo },
+    propsWithSuccess: {
+        goalId: number
     }
 }

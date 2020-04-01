@@ -20,3 +20,19 @@ export const createGoal = (goalId: number, comment: string) => ({
         schema: startedGoal
     }
 });
+
+export const loadPhoto = (goalId: number, photo: any) => {
+    const data = new FormData();
+    data.append('photo', photo);
+
+    return {
+        [CALL_API]: {
+            types: ['', ActionTypes.STARTED_GOALS_PHOTO_LOADED, ActionTypes.STARTED_GOALS_FAILURE],
+            endpoint: `/started-goals/${goalId}/upload-photo`,
+            method: Methods.POST,
+            data,
+            schema: {},
+            propsWithSuccess: { goalId }
+        }
+    };
+}

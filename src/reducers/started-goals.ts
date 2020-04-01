@@ -3,13 +3,13 @@ import { getGoalsEntitiesSelector } from './goals';
 import {
     ActionTypes,
     StartedGoalIds, StartedGoals, StartedGoalsWithGoal, StartedGoalsState, Goals, StartedGoalsWithGoalState,
-    StartedGoalsLoad, StartedGoalsSuccess, StartedGoalsFailure, StartedGoalCreated
+    StartedGoalsLoad, StartedGoalsSuccess, StartedGoalsFailure, StartedGoalCreated, StartedGoalsPhotoLoaded
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type StartedGoalsReducerActions = StartedGoalsLoad | StartedGoalsSuccess | StartedGoalsFailure | StartedGoalCreated;
+type StartedGoalsReducerActions = StartedGoalsLoad | StartedGoalsSuccess | StartedGoalsFailure | StartedGoalCreated | StartedGoalsPhotoLoaded;
 
 const initialGoalIds: StartedGoalIds = null;
 const initialGoals: StartedGoals = {};
@@ -43,6 +43,15 @@ function goals(state = initialGoals, action: StartedGoalsReducerActions): Starte
             return {
                 ...state,
                 ...action.payload.entities.startedGoals
+            };
+        case ActionTypes.STARTED_GOALS_PHOTO_LOADED:
+            return {
+                ...state,
+                [action.propsWithSuccess.goalId]: {
+                    ...state[action.propsWithSuccess.goalId],
+                    needPhoto: false,
+                    photo: action.payload.result
+                }
             };
 
         default:
