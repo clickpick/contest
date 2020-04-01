@@ -46,6 +46,20 @@ body {
     /* Textarea */
     --textarea_placeholder: rgba(var(--color), 0.4);
 
+    /* TextFiled */
+    --text-field_default_label-color: var(--os-secondary);
+    --text-field_default_label-focus-color: var(--primary);
+    --text-field_default_label-tertiary-color: var(--os-tertiary);
+
+    --text-field_default_body-background: var(--accent);
+    --text-field_default_body-focused-background: var(--secondary);
+    --text-field_default_body-error-background: var(--error-secondary);
+
+    --text-field_counter-color: var(--os-tertiary);
+    --text-field_counter-max-color: var(--error);
+
+    --text-field_hint-error-color: var(--error);
+
     /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
     background-color: var(--background);

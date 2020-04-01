@@ -1,0 +1,85 @@
+.TextField {
+    display: block;
+}
+
+/* Views */
+.TextField--promo .TextField__body:not(.TextField__body--focused):not(.TextField__body--error) {
+    background-color: transparent;
+}
+
+.TextField__label,
+.TextField__hint {
+    color: rgba(0, 0, 0, 0.6); /* fallback */
+    color: var(--text-field_default_label-color);
+
+    transition: color 150ms ease-in;
+}
+
+.TextField__label {
+    display: inline-block;
+}
+
+.TextField__label--focused {
+    color: #456BF1; /* fallback */
+    color: var(--text-field_default_label-focus-color);
+}
+
+.TextField__label--tertiary {
+    color: rgba(0, 0, 0, 0.6); /* fallback */
+    color: var(--text-field_default_label-tertiary-color);
+}
+
+.TextField__body {
+    border-radius: 4px;
+
+    background-color: rgba(0, 0, 0, 0.03); /* fallback */
+    background-color: var(--text-field_default_body-background);
+
+    transition: background-color 150ms ease-in;
+}
+
+.TextField__body--error {
+    background-color: rgba(255, 47, 47, 0.1); /* fallback */
+    background-color: var(--text-field_default_body-error-background);
+}
+
+.TextField__body--focused {
+    background-color: rgba(69, 107, 241, 0.1); /* fallback */
+    background-color: var(--text-field_default_body-focused-background);
+}
+
+.TextField__body-in {
+    display: flex;
+}
+
+.TextField__aside {
+    flex-shrink: 0;
+}
+
+.TextField__counter {
+    display: flex;
+    justify-content: flex-end;
+
+    max-height: 20px;
+    
+    color: rgba(0, 0, 0, 0.3); /* fallback */
+    color: var(--text-field_counter-color);
+
+    overflow: hidden;
+
+    transition: max-height 100ms ease-in;
+}
+
+.TextField__counter--hide {
+    max-height: 0;
+}
+
+.TextField__counter--max {
+    color: #E12F2F; /* fallback */
+    color: var(--text-field_counter-max-color);
+}
+
+.TextField__hint--error {
+    color: #E12F2F; /* fallback */
+    color: var(--text-field_hint-error-color);
+}
