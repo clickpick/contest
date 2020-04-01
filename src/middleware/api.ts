@@ -58,9 +58,9 @@ function callApi(endpoint: string, method: Methods, schema: Schema<any>, data?: 
 };
 
 function parseResponseData(response: Response): any {
-    if (response.meta) {
-        return response;
-    }
+    // if (response.meta) {
+    //     return response;
+    // }
 
     if (response.data) {
         return parseResponseData(response.data);
