@@ -7,6 +7,7 @@
 @import '../components/CircleButton/CircleButton.css';
 
 @import '../components/Photo/Photo.css';
+@import '../components/PhotoLoad/PhotoLoad.css';
 @import '../components/Statistics/Statistics.css';
 
 @import '../components/Headline/Headline.css';
