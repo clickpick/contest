@@ -21,6 +21,7 @@ interface CallAPIAction {
     data?: object
     schema: Schema<any>,
     propsWithRequestAction?: object
+    propsWithSuccess?: object
 }
 
 export enum Methods {
@@ -61,7 +62,11 @@ function callApi(endpoint: string, method: Methods, schema: Schema<any>, data?: 
     return instance({
         url: endpoint,
         method,
-        data: (data) ? decamelizeKeys(data) : undefined
+        data: (data)
+            ? (data instanceof FormData)
+                ? data
+                : decamelizeKeys(data)
+            : undefined
     }).then((response: Response) => {
         const data = parseResponseData(response);
         const camelizedData = camelizeKeys(data);
@@ -106,7 +111,7 @@ export default (store: any) => (next: any) => (action: any) => {
     }
 
     let { endpoint } = callAPI;
-    const { types, method, data, schema, propsWithRequestAction } = callAPI;
+    const { types, method, data, schema, propsWithRequestAction, propsWithSuccess } = callAPI;
 
     if (typeof endpoint === 'function') {
         endpoint = endpoint(store.getState());
@@ -146,7 +151,8 @@ export default (store: any) => (next: any) => (action: any) => {
     return callApi(endpoint, method, schema, data)
         .then((response) => next(actionWith({
             type: successType,
-            payload: response
+            payload: response,
+            propsWithSuccess
         })))
         .catch(error => next(actionWith({
             type: failureType,
