@@ -7,10 +7,12 @@ import * as GoalsActions from '../actions/started-goals';
 
 type FetchGoals = () => void;
 type CreateGoal = (goalId: number, comment: string) => void;
+type LoadPhoto = (goalId: number, file: any) => void;
 
 export interface UseStartedGoals extends StartedGoalsWithGoalState {
     fetchStartedGoals: FetchGoals,
-    createGoal: CreateGoal
+    createGoal: CreateGoal,
+    loadPhoto: LoadPhoto
 }
 
 export default function useStartedGoals(): UseStartedGoals {
@@ -22,5 +24,8 @@ export default function useStartedGoals(): UseStartedGoals {
     const createGoal = useCallback<CreateGoal>((goalId, comment) =>
         dispatch(GoalsActions.createGoal(goalId, comment)), [dispatch]);
 
-    return { ...state, fetchStartedGoals, createGoal };
+    const loadPhoto = useCallback<LoadPhoto>((goalid, file) =>
+        dispatch(GoalsActions.loadPhoto(goalid, file)), [dispatch]);
+
+    return { ...state, fetchStartedGoals, createGoal, loadPhoto };
 }
