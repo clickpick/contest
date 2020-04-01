@@ -43,6 +43,9 @@ body {
     --cell_primary-color: var(--os-primary);
     --cell_secondary-color: var(--os-secondary);
 
+    /* Textarea */
+    --textarea_placeholder: rgba(var(--color), 0.4);
+
     /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
     background-color: var(--background);
