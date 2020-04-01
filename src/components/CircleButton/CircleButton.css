@@ -1,0 +1,93 @@
+.CircleButton {
+    position: relative;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+
+    background-color: transparent;
+
+    font-size: 14px; /* fallback */
+    font-size: var(--font-size-14);
+    font-weight: 500; /* fallback */
+    font-weight: var(--font-weight-medium);
+    line-height: 20px;
+    color: var(--os-secondary);
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.CircleButton:disabled {
+    opacity: 0.6;
+}
+
+a.CircleButton {
+    text-decoration: none;
+    text-align: center;
+}
+
+.CircleButton__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.CircleButton__icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    background-color: var(--accent);
+}
+
+.CircleButton__icon svg,
+.CircleButton__icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.CircleButton__icon svg {
+    fill: #000;
+}
+
+/* priority */
+.CircleButton--primary {
+    color: var(--primary);
+}
+
+.CircleButton--primary .CircleButton__icon {
+    background-color: var(--secondary);
+}
+
+.CircleButton--primary .CircleButton__icon svg {
+    fill: var(--primary);
+}
+
+.CircleButton--danger {
+    color: #F09289;
+}
+
+.CircleButton--danger .CircleButton__icon {
+    background-color: rgba(240, 146, 137, 0.1);
+}
+
+.CircleButton--danger .CircleButton__icon svg {
+    fill: #F09289;
+}
+
+.CircleButton--pressed.CircleButton--danger .CircleButton__icon {
+    background-color: #F09289;
+}
+
+.CircleButton--pressed.CircleButton--danger .CircleButton__icon svg {
+    fill: #FFF;
+}
