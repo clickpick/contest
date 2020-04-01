@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect';
+import { getGoalsEntitiesSelector } from './goals';
 import {
     ActionTypes,
     StartedGoalIds, StartedGoals, StartedGoalsState,
@@ -59,3 +61,20 @@ export default function userReducer(state = startedGoalsInitialState, action: St
 
 // Selectors
 export const getStartedGoalsSelector = (state: AppState) => state.startedGoals;
+export const getEntitiesStartedGoalsSelector = createSelector(
+    [getGoalsEntitiesSelector, (state: AppState) => state.startedGoals.goals],
+    (goals, startedGoals) => Object.keys(startedGoals).reduce((acc, goalId) => ({
+        ...acc,
+        [goalId]: {
+            ...startedGoals[goalId],
+            goal: goals[startedGoals[goalId].goalId]
+        }
+    }), {})
+);
+export const getStartedGoalsEntitiesWithGoalSelector = createSelector(
+    [getEntitiesStartedGoalsSelector, getStartedGoalsSelector],
+    (goals, startedGoalsState) => ({
+        ...startedGoalsState,
+        goals
+    })
+);
