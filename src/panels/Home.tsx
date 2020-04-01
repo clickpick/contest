@@ -19,14 +19,25 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
     const { pending, data } = useUser();
     const { goalIds, goals } = useGoals();
 
+    const openProfile = useCallback((e: any) => {
+        const goalId = e.target.dataset.goalId;
+
+        if (Boolean(goalId)) {
+            window.location.search = window.location.search + '#goal=' + goalId;
+        }
+
+        goForward(e);
+    }, [goForward]);
+
     const avatarView = useMemo(() => (!pending && data) &&
         <Avatar
             className="margin-purple--left"
             size={32}
             src={data.avatar200}
             data-to={MainPanels.PROFILE}
-            onClick={goForward} />,
-        [pending, data, goForward]);
+            data-goal-id={data.startedGoalId}
+            onClick={openProfile} />,
+        [pending, data, openProfile]);
 
     const [selectedGoalId, setGoalId] = useState<number | null>(null);
 
