@@ -4,6 +4,7 @@ import '../styles/style.css';
 
 import useUser from '../hooks/use-user';
 import useGoals from '../hooks/use-goals';
+import useStartedGoals from '../hooks/use-started-goals';
 
 import { ConfigProvider, Root } from '@vkontakte/vkui';
 import Main from '../views/Main';
@@ -17,11 +18,13 @@ const App: FC = () => {
 
     const { auth } = useUser();
     const { fetchGoals } = useGoals();
+    const { fetchStartedGoals } = useStartedGoals();
 
     useEffect(() => {
         auth();
         fetchGoals();
-    }, [auth, fetchGoals]);
+        fetchStartedGoals();
+    }, [auth, fetchGoals, fetchStartedGoals]);
 
     return (
         <ConfigProvider isWebView={true}>
