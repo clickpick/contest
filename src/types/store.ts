@@ -46,6 +46,7 @@ export interface User {
     readonly avatar200: string,
     readonly messagesAreEnabled: boolean,
     readonly notificationsAreEnabled: boolean,
+    readonly startedGoalId: number | boolean
 }
 
 export interface UserState extends DataState {
