@@ -52,6 +52,7 @@ export interface User {
     readonly messagesAreEnabled: boolean,
     readonly notificationsAreEnabled: boolean,
     readonly startedGoalId: number | false
+    readonly daysCount: number
 }
 
 export interface UserWithGoal extends User {
