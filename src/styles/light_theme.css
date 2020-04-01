@@ -1,8 +1,8 @@
 body[scheme="client_light"],
 body[scheme="bright_light"] {
     /* Brand */
-    --primary: #456BF1;
-    --secondary: rgba(69, 107, 241, 0.1);
+    --primary: #75A4EC;
+    --secondary: rgba(117, 164, 236, 0.1);
 
     /* OnSurface */
     --os-primary: rgba(0, 0, 0, 0.9);
