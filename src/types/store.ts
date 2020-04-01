@@ -9,6 +9,10 @@ export enum ActionTypes {
 
     SET_MAIN_VIEW_PANEL = 'SET_MAIN_VIEW_PANEL',
     SET_CREATE_GOAL_PANEL = 'SET_CREATE_GOAL_PANEL',
+
+    STARTED_GOALS_REQUEST = 'STARTED_GOALS_REQUEST',
+    STARTED_GOALS_SUCCESS = 'STARTED_GOALS_SUCCESS',
+    STARTED_GOALS_FAILURE = 'STARTED_GOALS_FAILURE',
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -68,6 +72,32 @@ export interface GoalsState extends DataState {
     readonly goals: Goals
 }
 
+/* StartedGoals */
+export interface StartedGoal {
+    readonly id: number,
+    readonly score: number,
+    readonly likesCount: number,
+    readonly photosCount: number,
+    readonly globalTop: number,
+    readonly goalTop: number,
+    readonly isLiked: boolean,
+    readonly user: User,
+    readonly goal: Goal,
+    readonly photo: {
+        id: number,
+        link: string,
+        createdAt: string
+    }
+}
+
+export interface StartedGoals extends EntitiesObject<StartedGoal> { }
+export type StartedGoalIds = IdsArray | null;
+
+export interface StartedGoalsState extends DataState {
+    readonly goalIds: StartedGoalIds,
+    readonly goals: StartedGoals
+}
+
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /**
@@ -113,5 +143,23 @@ export interface GoalsSuccess {
 
 export interface GoalsFailure {
     type: ActionTypes.GOALS_FAILURE,
+    error: string
+}
+
+/* Goals */
+export interface StartedGoalsLoad {
+    type: ActionTypes.STARTED_GOALS_REQUEST
+}
+
+export interface StartedGoalsSuccess {
+    type: ActionTypes.STARTED_GOALS_SUCCESS,
+    payload: {
+        entities: { startedGoals: StartedGoals },
+        result: IdsArray
+    }
+}
+
+export interface StartedGoalsFailure {
+    type: ActionTypes.STARTED_GOALS_FAILURE,
     error: string
 }
