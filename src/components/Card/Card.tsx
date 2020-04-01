@@ -8,7 +8,7 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement>, HasChildren {
 }
 
 const Card: FC<CardProps> = ({ className, priority, ...restProps }: CardProps) => {
-    const classNames = useMemo(() => cn(className, 'Card', `Card--${priority}`, 'Bs(bb)'), [className, priority]);
+    const classNames = useMemo(() => cn(className, 'Card', `Card--${priority}`, 'Bs(bb)', 'Br(16)'), [className, priority]);
 
     return <div className={classNames} {...restProps} />;
 };

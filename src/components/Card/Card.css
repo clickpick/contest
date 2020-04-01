@@ -1,7 +1,3 @@
-.Card {
-    border-radius: 16px;
-}
-
 .Card--primary {
     background-color: var(--card_primary-background);
 }
