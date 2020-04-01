@@ -54,8 +54,16 @@ export interface User {
     readonly startedGoalId: number | false
 }
 
+export interface UserWithGoal extends User {
+    readonly startedGoal: StartedGoalWithGoal | false
+}
+
 export interface UserState extends DataState {
     readonly data: User | null
+}
+
+export interface UserWithGoalState extends DataState {
+    readonly data: UserWithGoal | null
 }
 
 /* Goals */
@@ -88,15 +96,25 @@ export interface StartedGoal {
         id: number,
         link: string,
         createdAt: string
-    }
+    } | undefined
+}
+
+export interface StartedGoalWithGoal extends StartedGoal {
+    readonly goal: Goal
 }
 
 export interface StartedGoals extends EntitiesObject<StartedGoal> { }
+export interface StartedGoalsWithGoal extends EntitiesObject<StartedGoalWithGoal> { }
 export type StartedGoalIds = IdsArray | null;
 
 export interface StartedGoalsState extends DataState {
     readonly goalIds: StartedGoalIds,
     readonly goals: StartedGoals
+}
+
+export interface StartedGoalsWithGoalState extends DataState {
+    readonly goalIds: StartedGoalIds,
+    readonly goals: StartedGoalsWithGoal
 }
 
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */

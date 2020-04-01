@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { UserState } from '../types/store';
+import { UserWithGoalState } from '../types/store';
 import { getUserWithStartedGoalSelected } from '../reducers/user';
 import * as UserActions from '../actions/user';
 
 type Auth = () => void;
 
-export interface UseUser extends UserState {
+export interface UseUser extends UserWithGoalState {
     auth: Auth
 }
 
