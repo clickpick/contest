@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { StartedGoalsState } from '../types/store';
+import { StartedGoalsWithGoalState } from '../types/store';
 import { getStartedGoalsEntitiesWithGoalSelector } from '../reducers/started-goals';
 import * as GoalsActions from '../actions/started-goals';
 
 type FetchGoals = () => void;
 type CreateGoal = (goalId: number, comment: string) => void;
 
-export interface UseStartedGoals extends StartedGoalsState {
+export interface UseStartedGoals extends StartedGoalsWithGoalState {
     fetchStartedGoals: FetchGoals,
     createGoal: CreateGoal
 }
