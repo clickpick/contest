@@ -42,6 +42,19 @@ const instance: AxiosInstance = axios.create({
     }
 });
 
+export async function getStoryLink(goalId: number) {
+    try {
+        const response: any = await instance({
+            url: `/started-goals/${goalId}/generate-story`,
+            method: Methods.POST,
+        });        
+
+        return response.data.data.link;
+    } catch(e) {
+        return null;
+    }
+}
+
 export const CALL_API: string = 'call-api';
 
 function callApi(endpoint: string, method: Methods, schema: Schema<any>, data?: object): Promise<any> {
