@@ -6,6 +6,10 @@
     flex-direction: column;
 }
 
+.Group--wrap {
+    flex-wrap: wrap;
+}
+
 .Group--jc-center {
     justify-content: center;
 }
