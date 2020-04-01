@@ -10,10 +10,11 @@ export interface StatisticsProps {
     likesCount: number,
     photosCount: number,
     globalTop: number,
-    goalTop: number
+    goalTop: number,
+    daysCount: number
 }
 
-const Statistics: FC<StatisticsProps> = ({ className, globalTop, goalTop, likesCount, photosCount }: StatisticsProps) => {
+const Statistics: FC<StatisticsProps> = ({ className, globalTop, goalTop, likesCount, photosCount, daysCount }: StatisticsProps) => {
     const classNames = useMemo(() => cn(className, 'Statistics padding-red--tb padding-blue--rl'), [className]);
 
     return (
@@ -35,13 +36,13 @@ const Statistics: FC<StatisticsProps> = ({ className, globalTop, goalTop, likesC
                 </Group>
                 <Group jcCenter className="margin-pink--bottom">
                     <Group className="Statistics__item margin-pink--right" vertical center>
-                        <span className="Statistics__value">100</span>
+                        <span className="Statistics__value">{photosCount}</span>
                         <Caption className="Ta(c) color-opacity--secondary">
                             продуктивных<br />дней
                     </Caption>
                     </Group>
                     <Group className="Statistics__item" vertical center>
-                        <span className="Statistics__value">20</span>
+                        <span className="Statistics__value">{daysCount}</span>
                         <Caption className="Ta(c) color-opacity--secondary">
                             зарегистрированных<br />дней
                     </Caption>
