@@ -1,13 +1,13 @@
 import {
     ActionTypes,
     User, UserState,
-    UserAuthLoad, UserAuthSuccess, UserAuthFailure
+    UserAuthLoad, UserAuthSuccess, UserAuthFailure, StartedGoalCreated
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type UserReducerActions = UserAuthLoad | UserAuthSuccess | UserAuthFailure;
+type UserReducerActions = UserAuthLoad | UserAuthSuccess | UserAuthFailure | StartedGoalCreated;
 
 const initialData: User | null = null;
 
@@ -21,6 +21,9 @@ function data(state = initialData, action: UserReducerActions): User | null {
     switch (action.type) {
         case ActionTypes.USER_AUTH_SUCCESS:
             return action.payload.result;
+
+        case ActionTypes.STARTED_GOALS_CREATED:
+            return state && { ...state, startedGoalId: action.payload.result };
 
         default:
             return state;

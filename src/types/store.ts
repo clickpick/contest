@@ -13,6 +13,7 @@ export enum ActionTypes {
     STARTED_GOALS_REQUEST = 'STARTED_GOALS_REQUEST',
     STARTED_GOALS_SUCCESS = 'STARTED_GOALS_SUCCESS',
     STARTED_GOALS_FAILURE = 'STARTED_GOALS_FAILURE',
+    STARTED_GOALS_CREATED = 'STARTED_GOALS_CREATED',
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -162,4 +163,12 @@ export interface StartedGoalsSuccess {
 export interface StartedGoalsFailure {
     type: ActionTypes.STARTED_GOALS_FAILURE,
     error: string
+}
+
+export interface StartedGoalCreated {
+    type: ActionTypes.STARTED_GOALS_CREATED,
+    payload: {
+        entities: { startedGoals: StartedGoals },
+        result: number
+    }
 }

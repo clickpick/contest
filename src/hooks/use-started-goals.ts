@@ -6,9 +6,11 @@ import { getStartedGoalsSelector } from '../reducers/started-goals';
 import * as GoalsActions from '../actions/started-goals';
 
 type FetchGoals = () => void;
+type CreateGoal = (goalId: number, comment: string) => void;
 
 export interface UseStartedGoals extends StartedGoalsState {
-    fetchStartedGoals: FetchGoals
+    fetchStartedGoals: FetchGoals,
+    createGoal: CreateGoal
 }
 
 export default function useStartedGoals(): UseStartedGoals {
@@ -17,5 +19,8 @@ export default function useStartedGoals(): UseStartedGoals {
 
     const fetchStartedGoals = useCallback<FetchGoals>(() => dispatch(GoalsActions.fetchStartedGoals()), [dispatch]);
 
-    return { ...state, fetchStartedGoals };
+    const createGoal = useCallback<CreateGoal>((goalId, comment) =>
+        dispatch(GoalsActions.createGoal(goalId, comment)), [dispatch]);
+
+    return { ...state, fetchStartedGoals, createGoal };
 }

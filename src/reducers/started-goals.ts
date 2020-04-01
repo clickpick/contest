@@ -1,13 +1,13 @@
 import {
     ActionTypes,
     StartedGoalIds, StartedGoals, StartedGoalsState,
-    StartedGoalsLoad, StartedGoalsSuccess, StartedGoalsFailure
+    StartedGoalsLoad, StartedGoalsSuccess, StartedGoalsFailure, StartedGoalCreated
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type StartedGoalsReducerActions = StartedGoalsLoad | StartedGoalsSuccess | StartedGoalsFailure;
+type StartedGoalsReducerActions = StartedGoalsLoad | StartedGoalsSuccess | StartedGoalsFailure | StartedGoalCreated;
 
 const initialGoalIds: StartedGoalIds = null;
 const initialGoals: StartedGoals = {};
@@ -24,6 +24,9 @@ function goalIds(state = initialGoalIds, action: StartedGoalsReducerActions): St
         case ActionTypes.STARTED_GOALS_SUCCESS:
             return action.payload.result;
 
+        case ActionTypes.STARTED_GOALS_CREATED:
+            return (Array.isArray(state)) ? [...state, action.payload.result] : [action.payload.result];
+
         default:
             return state;
     }
@@ -33,6 +36,13 @@ function goals(state = initialGoals, action: StartedGoalsReducerActions): Starte
     switch (action.type) {
         case ActionTypes.STARTED_GOALS_SUCCESS:
             return action.payload.entities.startedGoals;
+        
+        case ActionTypes.STARTED_GOALS_CREATED:
+            return {
+                ...state,
+                ...action.payload.entities.startedGoals
+            };
+
         default:
             return state;
     }
