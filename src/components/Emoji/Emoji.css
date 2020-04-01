@@ -3,6 +3,10 @@
     line-height: 1;
 }
 
+.Emoji--xsmall {
+    font-size: 12px;
+}
+
 .Emoji--medium {
     font-size: 30px;
 }

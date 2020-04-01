@@ -5,7 +5,7 @@ import { HasChildren } from '../../types/props';
 
 export interface EmojiProps extends HTMLAttributes<HTMLSpanElement>, HasChildren {
     label?: string,
-    size?: 'small' | 'medium' | 'large'
+    size?: 'xsmall' | 'small' | 'medium' | 'large'
 }
 
 const Emoji: FC<EmojiProps> = ({ className, label, size, ...restProps }) => {
