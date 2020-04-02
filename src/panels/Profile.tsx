@@ -9,7 +9,7 @@ import { showStoryBox } from '../helpers/vk';
 import useUser from '../hooks/use-user';
 import useStartedGoals from '../hooks/use-started-goals';
 
-import { Panel, PanelHeaderSimple, PanelHeaderBack, Avatar } from '@vkontakte/vkui';
+import { Panel, PanelHeaderSimple, PanelHeaderBack, Avatar, Placeholder, FixedLayout } from '@vkontakte/vkui';
 import Cell from '../components/Cell';
 import Group from '../components/Group';
 import Emoji from '../components/Emoji';
@@ -17,15 +17,22 @@ import Card from '../components/Card';
 import Footnote from '../components/Footnote';
 import Photo from '../components/Photo';
 import PhotoLoad from '../components/PhotoLoad';
+import Button from '../components/Button';
 import CircleButton from '../components/CircleButton';
 import Statistics from '../components/Statistics';
 
+// @ts-ignore
+import Icon56AddCircleOutline from '@vkontakte/icons/dist/56/add_circle_outline';
 import { ReactComponent as IconUnion } from '../svg/union.svg';
 import { ReactComponent as IconSettings } from '../svg/settings.svg';
 import { ReactComponent as IconHeart } from '../svg/heart.svg';
 import { ReactComponent as IconVk } from '../svg/vk.svg';
 
-const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
+export interface ProfileProps extends PanelSecondary {
+    createGoal(): void
+}
+
+const Profile: FC<ProfileProps> = ({ id, goBack, createGoal }: ProfileProps) => {
     const { data } = useUser();
     const { goals, loadPhoto, like } = useStartedGoals();
 
@@ -53,8 +60,24 @@ const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
 
     const bodyView = useMemo(() => {
         if (!data || data.startedGoal === false) {
-            // todo message
-            return;
+            return <>
+                <Cell
+                    className="margin-aqua--bottom"
+                    size="medium"
+                    before={<Avatar size={36} src={data?.avatar200} />}
+                    hCenter>
+                    {data?.firstName} {data?.lastName}
+                </Cell>
+                <Placeholder
+                    icon={<Icon56AddCircleOutline />}
+                    header="Поставь цель"
+                    children="и начни к ней двигаться" />
+                <FixedLayout vertical="bottom">
+                    <Group jcCenter className="margin-pink--bottom">
+                        <Button onClick={createGoal}>Поставить себе цель</Button>
+                    </Group>
+                </FixedLayout>
+            </>;
         }
 
         let startedGoal = (goalId.current === null) ? data?.startedGoal : goals[goalId.current];
