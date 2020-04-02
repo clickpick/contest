@@ -12,6 +12,7 @@ import { Panel, PanelHeaderSimple, Avatar, HorizontalScroll, FixedLayout } from 
 import Group from '../components/Group';
 import Chart from '../components/Chart';
 import Button from '../components/Button';
+import PhotoLoad from '../components/PhotoLoad';
 
 export interface HomeProps extends PanelPrimary {
     createGoal(): void
@@ -20,7 +21,7 @@ export interface HomeProps extends PanelPrimary {
 const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
     const { pending, data } = useUser();
     const { goalIds, goals, selectedGoal, setGoal } = useGoals();
-    const { goalIds: sGIds, goals: sGs } = useStartedGoals(true);
+    const { goalIds: sGIds, goals: sGs, loadPhoto } = useStartedGoals(true);
 
     const myGoal = useMemo(() => !!data && data.startedGoal && data.startedGoal.goal, [data]);
 
@@ -98,7 +99,7 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
         </HorizontalScroll>,
         [sGIds, sGs, openProfile]);
 
-    const createGoalView = useMemo(() => (!!data && data?.startedGoalId === false) &&
+    const createGoalView = useMemo(() => (!!data) && (data?.startedGoalId === false) &&
         <FixedLayout vertical="bottom">
             <Group jcCenter className="margin-pink--bottom">
                 <Button children="Поставить себе цель" onClick={createGoal} />
@@ -106,12 +107,24 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
         </FixedLayout>,
         [data, createGoal]);
 
+    const userActionView = useMemo(() => (!!data && data.startedGoal && data.startedGoal.needPhoto) &&
+        <FixedLayout vertical="bottom">
+            <Group jcCenter className="margin-pink--bottom">
+                <PhotoLoad
+                    shape="range"
+                    goalId={data?.startedGoal.id}
+                    onChange={loadPhoto} />
+            </Group>
+        </FixedLayout>,
+        [data, loadPhoto]);
+
     return (
         <Panel id={id} separator={false}>
             <PanelHeaderSimple left={avatarView} separator={false} />
             {goalsView}
             {sGView}
             {createGoalView}
+            {userActionView}
         </Panel>
     );
 };
