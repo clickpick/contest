@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { StartedGoalsWithGoalState } from '../types/store';
-import { getStartedGoalsEntitiesWithGoalSelector } from '../reducers/started-goals';
+import { getStartedGoalsEntitiesWithGoalSelector, getGoalsWithFilterSelector } from '../reducers/started-goals';
 import * as GoalsActions from '../actions/started-goals';
 
 type FetchGoals = () => void;
@@ -15,8 +15,8 @@ export interface UseStartedGoals extends StartedGoalsWithGoalState {
     loadPhoto: LoadPhoto
 }
 
-export default function useStartedGoals(): UseStartedGoals {
-    const state = useSelector(getStartedGoalsEntitiesWithGoalSelector);
+export default function useStartedGoals(withFilter?: boolean): UseStartedGoals {
+    const state = useSelector((withFilter) ? getGoalsWithFilterSelector : getStartedGoalsEntitiesWithGoalSelector);
     const dispatch = useDispatch();
 
     const fetchStartedGoals = useCallback<FetchGoals>(() => dispatch(GoalsActions.fetchStartedGoals()), [dispatch]);

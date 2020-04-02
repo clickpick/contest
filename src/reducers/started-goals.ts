@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getGoalsEntitiesSelector } from './goals';
+import { getGoalsEntitiesSelector, getSelectedGoalSelector } from './goals';
 import {
     ActionTypes,
     StartedGoalIds, StartedGoals, StartedGoalsWithGoal, StartedGoalsState, Goals, StartedGoalsWithGoalState,
@@ -87,4 +87,19 @@ export const getStartedGoalsEntitiesWithGoalSelector = createSelector<AppState, 
         ...startedGoalsState,
         goals
     })
+);
+
+export const getGoalsWithFilterSelector = createSelector<AppState, any, StartedGoalsWithGoalState, StartedGoalsWithGoalState>(
+    [getSelectedGoalSelector, getStartedGoalsEntitiesWithGoalSelector],
+    (selectedGoal, state) => {
+        switch (selectedGoal) {
+            case 'all':
+                return state;
+            default:
+                return {
+                    ...state,
+                    goalIds: state.goalIds && state.goalIds.filter((goalId) => state.goals[goalId].goal.id === selectedGoal)
+                };
+        }
+    }
 );
