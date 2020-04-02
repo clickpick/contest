@@ -67,3 +67,4 @@ export default function userReducer(state = goalsInitialState, action: GoalsRedu
 // Selectors
 export const getGoalsSelector = (state: AppState) => state.goals;
 export const getGoalsEntitiesSelector = (state: AppState) => state.goals.goals;
+export const getSelectedGoalSelector = (state: AppState) => state.goals.selectedGoal;
