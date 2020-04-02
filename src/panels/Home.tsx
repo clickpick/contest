@@ -22,6 +22,8 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
     const { goalIds, goals, selectedGoal, setGoal } = useGoals();
     const { goalIds: sGIds, goals: sGs } = useStartedGoals(true);
 
+    const myGoal = useMemo(() => !!data && data.startedGoal && data.startedGoal.goal, [data]);
+
     const openProfile = useCallback((e: any) => {
         const goalId = e.currentTarget.dataset.goalId;
 
@@ -80,10 +82,10 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
                         data-goal-id="friends"
                         onClick={setGoal} />
                 </div>
-                {goalIds.map(goalView)}
+                {(myGoal) ? goalView(myGoal.id, 0, [1]) : goalIds.map(goalView)}
             </Group>
         </HorizontalScroll>,
-        [goalIds, selectedGoal, goalView, setGoal]);
+        [goalIds, selectedGoal, myGoal, goalView, setGoal]);
 
     const sGView = useMemo(() => (Array.isArray(sGIds)) &&
         <HorizontalScroll className="padding-black--bottom">
