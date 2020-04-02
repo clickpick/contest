@@ -18,13 +18,16 @@ export interface BarProps {
 }
 
 const Bar: FC<BarProps> = ({ className, priority, user, height, goal, position, ...restProps }: BarProps) => {
-    const classNames = useMemo<string>(() => cn(className, 'Bar', `Bar--${priority}`), [className, priority]);
+    const classNames = useMemo<string>(() => cn(className, 'Bar', `Bar--${priority}`, 'padding-blue--top'), [className, priority]);
 
+    const crownView = useMemo(() => (!!position && position === 1) &&
+        <img className="Bar__crown" src="./svg/crown.svg" alt="crown" />, [position]);
     const positionView = useMemo(() => (!!position) &&
         <Caption className="color-opacity--secondary Ta(c) padding-blue--top">{position}</Caption>, [position]);
 
     return (
         <Group vertical className={classNames} {...restProps}>
+            {crownView}
             <Avatar
                 className="Bar__Avatar margin-purple--bottom"
                 size={36}
