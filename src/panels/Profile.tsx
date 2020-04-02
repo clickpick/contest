@@ -30,7 +30,7 @@ const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
     const { goals, loadPhoto } = useStartedGoals();
 
     const goalId = useRef<string | null>(getHashParam(window.location.href, 'goal'));
-    const isMe = useRef(goalId.current === null || Number(goalId.current) === data?.id);
+    const isMe = useRef(goalId.current === null || Number(goalId.current) === data?.startedGoalId);
 
     const postStory = useCallback(async (e: any) => {
         const goalId: number = Number(e.currentTarget.dataset.goalId);
