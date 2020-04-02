@@ -25,7 +25,7 @@ const Main: FC<MainProps> = ({ id, createGoal }: MainProps) => {
             header={false}
             onSwipeBack={mainView.goBack}>
             <Home id={MainPanels.HOME} goForward={mainView.goForward} createGoal={createGoal} />
-            <Profile id={MainPanels.PROFILE} goBack={mainView.goBack} />
+            <Profile id={MainPanels.PROFILE} goBack={mainView.goBack} createGoal={createGoal} />
         </View>
     );
 };
