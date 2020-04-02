@@ -2,16 +2,18 @@ import React, { FC, useRef, useMemo, useCallback, memo } from 'react';
 import cn from 'classnames';
 
 import CircleButton from '../CircleButton';
+import Button from '../Button';
 
 import { ReactComponent as IconPlus } from '../../svg/plus.svg';
 
 export interface PhotoLoadProps {
     className?: string,
+    shape?: 'range' | 'circle',
     goalId: number,
     onChange?(goalId: number, file: any): void
 }
 
-const PhotoLoad: FC<PhotoLoadProps> = ({ className, goalId, onChange }: PhotoLoadProps) => {
+const PhotoLoad: FC<PhotoLoadProps> = ({ className, shape, goalId, onChange }: PhotoLoadProps) => {
     const inputRef = useRef<any>(null);
     const classNames = useMemo(() => cn(className, 'PhotoLoad'), [className]);
 
@@ -29,12 +31,15 @@ const PhotoLoad: FC<PhotoLoadProps> = ({ className, goalId, onChange }: PhotoLoa
                 ref={inputRef}
                 accept="image/*"
                 onChange={handleChange} />
-            <CircleButton
-                icon={<IconPlus />}>
-                Добавить<br />фотоотчёт
-            </CircleButton>
+            {(shape === 'circle')
+                ? <CircleButton icon={<IconPlus />}>Добавить<br />фотоотчёт</CircleButton>
+                : <Button priority='secondary'>Добавить фотоотчёт</Button>}
         </label>
     );
 };
+
+PhotoLoad.defaultProps = {
+    shape: 'circle'
+}
 
 export default memo(PhotoLoad);
