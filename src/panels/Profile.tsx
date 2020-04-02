@@ -69,9 +69,9 @@ const Profile: FC<ProfileProps> = ({ id, goBack, createGoal }: ProfileProps) => 
                     {data?.firstName} {data?.lastName}
                 </Cell>
                 <Placeholder
-                    icon={<Icon56AddCircleOutline />}
-                    header="Поставь цель"
-                    children="и начни к ней двигаться" />
+                    icon={<Emoji size="large" children="😬" />}
+                    header="У тебя нет цели"
+                    children="Поставь её!" />
                 <FixedLayout vertical="bottom">
                     <Group jcCenter className="margin-pink--bottom">
                         <Button onClick={createGoal}>Поставить себе цель</Button>
