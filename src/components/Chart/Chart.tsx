@@ -17,7 +17,8 @@ export interface ChartProps {
 
 const Chart: FC<ChartProps> = ({ className, goals, goalIds, maxHeight = 400, profileLink, goProfile }: ChartProps) => {
     const classNames = useMemo<string>(() => cn(className, 'Chart'), [className]);
-    const maxScore = useMemo(() => goals[goalIds[0]].score, [goals, goalIds]);
+
+    const maxScore = (goalIds.length > 0) ? goals[goalIds[0]].score : 1;
 
     const barView = useCallback((goalId: number, index: number) => {
         const goal = goals[goalId];
@@ -43,7 +44,7 @@ const Chart: FC<ChartProps> = ({ className, goals, goalIds, maxHeight = 400, pro
 
     return (
         <Group end shrink className={classNames}>
-            {goalIds.concat(goalIds).concat(goalIds).concat(goalIds).map(barView)}
+            {goalIds.map(barView)}
         </Group>
     );
 };
