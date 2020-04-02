@@ -18,11 +18,11 @@ export interface ChartProps {
 const Chart: FC<ChartProps> = ({ className, goals, goalIds, maxHeight = 400, profileLink, goProfile }: ChartProps) => {
     const classNames = useMemo<string>(() => cn(className, 'Chart'), [className]);
 
-    const maxScore = (goalIds.length > 0) ? goals[goalIds[0]].score : 1;
+    const maxScore = (goalIds.length > 0) ? (goals[goalIds[0]].score || 1) : 1;
 
     const barView = useCallback((goalId: number, index: number) => {
         const goal = goals[goalId];
-        const height: number = (goal.score * maxHeight) / maxScore;
+        const height: number = ((goal.score || 1) * maxHeight) / maxScore;
 
         return (
             <div
