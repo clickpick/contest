@@ -1,0 +1,30 @@
+.Bar {
+    position: relative;
+}
+
+.Bar__IconCrown {
+    position: absolute;
+    left: 50%;
+    transform: translate(0, -50%);
+    z-index: 20;
+}
+
+.Bar__column {
+    position: relative;
+
+    width: 36px;
+
+    border-radius: 18px;
+
+    background-color: var(--bar);
+}
+
+.Bar--primary .Bar__column {
+    background-color: var(--primary);
+}
+
+.Bar__Emoji {
+    position: absolute;
+    left: 7px;
+    bottom: 8px;
+}
