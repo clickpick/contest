@@ -99,7 +99,7 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
                         <Emoji size="large" children="👋" />
                         <Title className="margin-purple--top">Привет, {data?.firstName}!</Title>
                         <Footnote className="margin-purple--top">
-                            Ставь цели, делай фотоотчёт, составляй коллаж в истории и соревнуйся с другими!
+                            Ставь цели, делай фотоотчёт, составляй коллаж в истории и соревнуйся с друзьями!
                         </Footnote>
                     </div>}
                 <Chart

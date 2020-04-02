@@ -27,7 +27,7 @@ export const loadPhoto = (goalId: number, photo: any) => {
 
     return {
         [CALL_API]: {
-            types: ['', ActionTypes.STARTED_GOALS_PHOTO_LOADED, ActionTypes.STARTED_GOALS_FAILURE],
+            types: [ActionTypes.STARTED_GOALS_PHOTO_REQUEST, ActionTypes.STARTED_GOALS_PHOTO_LOADED, ActionTypes.STARTED_GOALS_FAILURE],
             endpoint: `/started-goals/${goalId}/upload-photo`,
             method: Methods.POST,
             data,

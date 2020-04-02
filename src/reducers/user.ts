@@ -45,7 +45,7 @@ export const getUserSelector = (state: AppState) => state.user;
 export const getUserDataSelector = (state: AppState) => state.user.data;
 export const getUserDataWithSelectedGoalSelector = createSelector<AppState, any, User | null, UserWithGoal | null>(
     [getEntitiesStartedGoalsWithGoalSelector, getUserDataSelector],
-    (goals, user) => {    
+    (goals, user) => {
         return user && {
             ...user,
             startedGoal: user.startedGoalId && goals[user.startedGoalId]

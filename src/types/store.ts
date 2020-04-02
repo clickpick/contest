@@ -16,6 +16,7 @@ export enum ActionTypes {
     STARTED_GOALS_FAILURE = 'STARTED_GOALS_FAILURE',
     STARTED_GOALS_CREATED = 'STARTED_GOALS_CREATED',
 
+    STARTED_GOALS_PHOTO_REQUEST = 'STARTED_GOALS_PHOTO_REQUEST',
     STARTED_GOALS_PHOTO_LOADED = 'STARTED_GOALS_PHOTO_LOADED',
     STARTED_GOALS_LIKE = 'STARTED_GOALS_LIKE'
 }
@@ -207,6 +208,11 @@ export interface StartedGoalCreated {
         entities: { startedGoals: StartedGoals },
         result: number
     }
+}
+
+export interface StartedGoalPhotoRequest {
+    type: ActionTypes.STARTED_GOALS_PHOTO_REQUEST,
+    goalId: number
 }
 
 export interface StartedGoalsPhotoLoaded {

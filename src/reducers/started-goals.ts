@@ -3,13 +3,13 @@ import { getGoalsEntitiesSelector, getSelectedGoalSelector } from './goals';
 import {
     ActionTypes,
     StartedGoalIds, StartedGoals, StartedGoalsWithGoal, StartedGoalsState, Goals, StartedGoalsWithGoalState,
-    StartedGoalsLoad, StartedGoalsSuccess, StartedGoalsFailure, StartedGoalCreated, StartedGoalsPhotoLoaded, StartedGoalLike
+    StartedGoalsLoad, StartedGoalsSuccess, StartedGoalsFailure, StartedGoalCreated, StartedGoalPhotoRequest, StartedGoalsPhotoLoaded, StartedGoalLike
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type StartedGoalsReducerActions = StartedGoalsLoad | StartedGoalsSuccess | StartedGoalsFailure | StartedGoalCreated | StartedGoalsPhotoLoaded | StartedGoalLike;
+type StartedGoalsReducerActions = StartedGoalsLoad | StartedGoalsSuccess | StartedGoalsFailure | StartedGoalCreated | StartedGoalPhotoRequest | StartedGoalsPhotoLoaded | StartedGoalLike;
 
 const initialGoalIds: StartedGoalIds = null;
 const initialGoals: StartedGoals = {};
@@ -46,6 +46,16 @@ function goals(state = initialGoals, action: StartedGoalsReducerActions): Starte
                 ...state,
                 ...action.payload.entities.startedGoals
             };
+
+        case ActionTypes.STARTED_GOALS_PHOTO_REQUEST:
+            return {
+                ...state,
+                [action.goalId]: {
+                    ...state[action.goalId],
+                    needPhoto: false,
+                }
+            };
+
         case ActionTypes.STARTED_GOALS_PHOTO_LOADED:
             return {
                 ...state,
