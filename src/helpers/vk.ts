@@ -11,12 +11,12 @@ export const subscribe = () => {
             document.body.attributes.setNamedItem(schemeAttribute);
 
             let statusBarStyle: 'light' | 'dark' = 'dark';
-            let actionBar = '#000';
+            let actionBar = '#FFF';
             let navigationBar = '#FFF';
 
             if (schemeAttribute.value === 'space_gray' || schemeAttribute.value === 'client_dark') {
                 statusBarStyle = 'light';
-                actionBar = '#FFF';
+                actionBar = '#171717';
                 navigationBar = '#171717';
             }
 
