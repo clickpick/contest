@@ -6,9 +6,11 @@ import { MainPanels } from '../types/panels';
 
 import useUser from '../hooks/use-user';
 import useGoals from '../hooks/use-goals';
+import useStartedGoals from '../hooks/use-started-goals';
 
-import { Panel, PanelHeaderSimple, Avatar, HorizontalScroll } from '@vkontakte/vkui';
+import { Panel, PanelHeaderSimple, Avatar, HorizontalScroll, FixedLayout } from '@vkontakte/vkui';
 import Group from '../components/Group';
+import Chart from '../components/Chart';
 import Button from '../components/Button';
 
 export interface HomeProps extends PanelPrimary {
@@ -18,9 +20,10 @@ export interface HomeProps extends PanelPrimary {
 const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
     const { pending, data } = useUser();
     const { goalIds, goals } = useGoals();
+    const { goalIds: sGIds, goals: sGs } = useStartedGoals();
 
     const openProfile = useCallback((e: any) => {
-        const goalId = e.target.dataset.goalId;
+        const goalId = e.currentTarget.dataset.goalId;
 
         if (Boolean(goalId)) {
             window.location.search = window.location.search + '#goal=' + goalId;
@@ -86,11 +89,32 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
         </HorizontalScroll>,
         [goalIds, selectedGoalId, goalView, resetGoal]);
 
+    const sGView = useMemo(() => (Array.isArray(sGIds)) &&
+        <HorizontalScroll className="padding-black--bottom">
+            <Chart
+                goalIds={sGIds}
+                goals={sGs}
+                maxHeight={328}
+                profileLink={MainPanels.PROFILE}
+                goProfile={openProfile} />
+        </HorizontalScroll>,
+        [sGIds, sGs, openProfile]);
+
+    const createGoalView = useMemo(() => (!!data && data?.startedGoalId === false) &&
+        <FixedLayout vertical="bottom">
+            <Group jcCenter className="margin-pink--bottom">
+                <Button children="Поставить себе цель" onClick={createGoal} />
+            </Group>
+        </FixedLayout>,
+        [data, createGoal]);
+
     return (
         <Panel id={id} separator={false}>
             <PanelHeaderSimple left={avatarView} separator={false} />
             {goalsView}
-            <Button children="create" onClick={createGoal} />
+            {sGView}
+            {createGoalView}
+
         </Panel>
     );
 };
