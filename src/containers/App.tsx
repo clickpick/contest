@@ -36,7 +36,7 @@ const App: FC = () => {
     }, [activeView, data, goalIds, sGIds]);
 
     return (
-        <ConfigProvider isWebView={true} scheme="client_dark">
+        <ConfigProvider isWebView={true}>
             <Root activeView={activeView}>
                 <Main id="main" createGoal={createGoal} />
                 <CreateGoal id="create-goal" goMain={goMain} />
