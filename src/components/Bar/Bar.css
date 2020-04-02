@@ -13,6 +13,7 @@
     position: relative;
 
     width: 36px;
+    min-height: 16px;
 
     border-radius: 18px;
 
