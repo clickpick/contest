@@ -1,4 +1,4 @@
-import React, { FC, useRef, useMemo, useCallback } from 'react';
+import React, { FC, useRef, useMemo, useCallback, useEffect } from 'react';
 
 import { PanelSecondary } from '../types/props';
 
@@ -29,7 +29,7 @@ const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
     const { data } = useUser();
     const { goals, loadPhoto } = useStartedGoals();
 
-    const goalId = useRef<string | null>(getHashParam(window.location.href, 'goalId'));
+    const goalId = useRef<string | null>(getHashParam(window.location.href, 'goal'));
     const isMe = useRef(goalId.current === null || Number(goalId.current) === data?.id);
 
     const postStory = useCallback(async (e: any) => {
@@ -45,6 +45,10 @@ const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
 
             e.currentTarget.disabled = false;
         }
+    }, []);
+
+    useEffect(() => {
+        window.history.pushState('', '', '#');
     }, []);
 
     const bodyView = useMemo(() => {
@@ -87,7 +91,7 @@ const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
                     priority="danger"
                     aria-pressed={startedGoal.isLiked}
                     icon={<IconHeart />}>
-                    {(startedGoal.isLiked) ? <>Мотивировать<br />лайком!</> : 'Спасибо!'}
+                    {(startedGoal.isLiked) ? 'Спасибо!' : <>Мотивировать<br />лайком!</>}
                 </CircleButton>
                 <CircleButton
                     priority="primary"
