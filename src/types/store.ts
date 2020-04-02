@@ -54,7 +54,8 @@ export interface User {
     readonly messagesAreEnabled: boolean,
     readonly notificationsAreEnabled: boolean,
     readonly startedGoalId: number | false
-    readonly daysCount: number
+    readonly daysCount: number,
+    readonly isFriend: boolean
 }
 
 export interface UserWithGoal extends User {
