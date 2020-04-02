@@ -16,7 +16,8 @@ export enum ActionTypes {
     STARTED_GOALS_FAILURE = 'STARTED_GOALS_FAILURE',
     STARTED_GOALS_CREATED = 'STARTED_GOALS_CREATED',
 
-    STARTED_GOALS_PHOTO_LOADED = 'STARTED_GOALS_PHOTO_LOADED'
+    STARTED_GOALS_PHOTO_LOADED = 'STARTED_GOALS_PHOTO_LOADED',
+    STARTED_GOALS_LIKE = 'STARTED_GOALS_LIKE'
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -214,4 +215,9 @@ export interface StartedGoalsPhotoLoaded {
     propsWithSuccess: {
         goalId: number
     }
+}
+
+export interface StartedGoalLike {
+    type: ActionTypes.STARTED_GOALS_LIKE,
+    goalId: number
 }

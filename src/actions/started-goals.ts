@@ -36,3 +36,15 @@ export const loadPhoto = (goalId: number, photo: any) => {
         }
     };
 }
+
+export const like = (goalId: number) => ({
+    [CALL_API]: {
+        types: [ActionTypes.STARTED_GOALS_LIKE, '', ActionTypes.STARTED_GOALS_FAILURE],
+        endpoint: `/started-goals/${goalId}/like`,
+        method: Methods.POST,
+        schema: {},
+        propsWithRequestAction: {
+            goalId
+        }
+    }
+})

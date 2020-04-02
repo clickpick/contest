@@ -3,13 +3,13 @@ import { getGoalsEntitiesSelector, getSelectedGoalSelector } from './goals';
 import {
     ActionTypes,
     StartedGoalIds, StartedGoals, StartedGoalsWithGoal, StartedGoalsState, Goals, StartedGoalsWithGoalState,
-    StartedGoalsLoad, StartedGoalsSuccess, StartedGoalsFailure, StartedGoalCreated, StartedGoalsPhotoLoaded
+    StartedGoalsLoad, StartedGoalsSuccess, StartedGoalsFailure, StartedGoalCreated, StartedGoalsPhotoLoaded, StartedGoalLike
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type StartedGoalsReducerActions = StartedGoalsLoad | StartedGoalsSuccess | StartedGoalsFailure | StartedGoalCreated | StartedGoalsPhotoLoaded;
+type StartedGoalsReducerActions = StartedGoalsLoad | StartedGoalsSuccess | StartedGoalsFailure | StartedGoalCreated | StartedGoalsPhotoLoaded | StartedGoalLike;
 
 const initialGoalIds: StartedGoalIds = null;
 const initialGoals: StartedGoals = {};
@@ -53,6 +53,15 @@ function goals(state = initialGoals, action: StartedGoalsReducerActions): Starte
                     ...state[action.propsWithSuccess.goalId],
                     needPhoto: false,
                     photo: action.payload.result
+                }
+            };
+
+        case ActionTypes.STARTED_GOALS_LIKE:
+            return {
+                ...state,
+                [action.goalId]: {
+                    ...state[action.goalId],
+                    isLiked: true
                 }
             };
 
