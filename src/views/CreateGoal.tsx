@@ -24,7 +24,7 @@ const CreateGoal: FC<CreateGoalProps> = ({ id, goMain }: CreateGoalProps) => {
     const [selectedGoalId, setGoalId] = useState<number | null>(null);
 
     const setGoal = useCallback((e: any) => {
-        const goalId = Number(e.target.dataset.goalId);
+        const goalId = Number(e.currentTarget.dataset.goalId);
 
         if (!goalId) {
             return;
