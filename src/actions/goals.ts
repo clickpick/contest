@@ -10,3 +10,8 @@ export const fetchGoals = () => ({
         schema: arrayOfGoals
     }
 });
+
+export const setGoal = (goal: string) => ({
+    type: ActionTypes.SET_GOAL,
+    goal
+});

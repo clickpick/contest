@@ -6,6 +6,7 @@ export enum ActionTypes {
     GOALS_REQUEST = 'GOALS_REQUEST',
     GOALS_SUCCESS = 'GOALS_SUCCESS',
     GOALS_FAILURE = 'GOALS_FAILURE',
+    SET_GOAL = 'SET_GOAL',
 
     SET_MAIN_VIEW_PANEL = 'SET_MAIN_VIEW_PANEL',
     SET_CREATE_GOAL_PANEL = 'SET_CREATE_GOAL_PANEL',
@@ -80,9 +81,12 @@ export interface Goal {
 export interface Goals extends EntitiesObject<Goal> { }
 export type GoalIds = IdsArray | null;
 
+export type SelectedGoal = 'all' | number;
+
 export interface GoalsState extends DataState {
     readonly goalIds: GoalIds,
-    readonly goals: Goals
+    readonly goals: Goals,
+    readonly selectedGoal: SelectedGoal
 }
 
 export interface Photo {
@@ -171,6 +175,11 @@ export interface GoalsSuccess {
 export interface GoalsFailure {
     type: ActionTypes.GOALS_FAILURE,
     error: string
+}
+
+export interface SetGoal {
+    type: ActionTypes.SET_GOAL,
+    goal: SelectedGoal
 }
 
 /* Goals */
