@@ -36,8 +36,10 @@ function goalIds(state = initialGoalIds, action: StartedGoalsReducerActions): St
 
 function goals(state = initialGoals, action: StartedGoalsReducerActions): StartedGoals {
     switch (action.type) {
-        case ActionTypes.STARTED_GOALS_SUCCESS:
-            return action.payload.entities.startedGoals;
+        case ActionTypes.STARTED_GOALS_SUCCESS:            
+            return (action.payload.entities.hasOwnProperty('startedGoals'))
+                ? action.payload.entities.startedGoals
+                : state;
         
         case ActionTypes.STARTED_GOALS_CREATED:
             return {
@@ -71,8 +73,9 @@ export default function userReducer(state = startedGoalsInitialState, action: St
 // Selectors
 export const getStartedGoalsSelector = (state: AppState) => state.startedGoals;
 export const getEntitiesStartedGoalsSelector = (state: AppState) => state.startedGoals.goals;
+export const getG = (state: AppState) => state.startedGoals.goals;
 export const getEntitiesStartedGoalsWithGoalSelector = createSelector<AppState, Goals, StartedGoals, StartedGoalsWithGoal>(
-    [getGoalsEntitiesSelector, (state: AppState) => state.startedGoals.goals],
+    [getGoalsEntitiesSelector, getG],
     (goals, startedGoals) => Object.keys(startedGoals).reduce((acc, goalId) => ({
         ...acc,
         [goalId]: {
@@ -95,6 +98,11 @@ export const getGoalsWithFilterSelector = createSelector<AppState, any, StartedG
         switch (selectedGoal) {
             case 'all':
                 return state;
+            case 'friends':
+                return {
+                    ...state,
+                    goalIds: state.goalIds && state.goalIds.filter((goalId) => state.goals[goalId].user.isFriend)
+                };
             default:
                 return {
                     ...state,

@@ -81,7 +81,7 @@ export interface Goal {
 export interface Goals extends EntitiesObject<Goal> { }
 export type GoalIds = IdsArray | null;
 
-export type SelectedGoal = 'all' | number;
+export type SelectedGoal = 'all' | 'friends' | number;
 
 export interface GoalsState extends DataState {
     readonly goalIds: GoalIds,
