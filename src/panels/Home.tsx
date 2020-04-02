@@ -13,6 +13,9 @@ import Group from '../components/Group';
 import Chart from '../components/Chart';
 import Button from '../components/Button';
 import PhotoLoad from '../components/PhotoLoad';
+import Emoji from '../components/Emoji';
+import Title from '../components/Title';
+import Footnote from '../components/Footnote';
 
 export interface HomeProps extends PanelPrimary {
     createGoal(): void
@@ -90,14 +93,24 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
 
     const sGView = useMemo(() => (Array.isArray(sGIds)) &&
         <HorizontalScroll className="padding-black--bottom">
-            <Chart
-                goalIds={sGIds}
-                goals={sGs}
-                maxHeight={328}
-                profileLink={MainPanels.PROFILE}
-                goProfile={openProfile} />
+            <Group>
+                {(!myGoal) &&
+                    <div className="margin-purple--left" style={{ width: '230px', paddingTop: '56px', flexShrink: 0 }}>
+                        <Emoji size="large" children="👋" />
+                        <Title className="margin-purple--top">Привет, {data?.firstName}!</Title>
+                        <Footnote className="margin-purple--top">
+                            Ставь цели, делай фотоотчёт, составляй коллаж в истории и соревнуйся с другими!
+                        </Footnote>
+                    </div>}
+                <Chart
+                    goalIds={sGIds}
+                    goals={sGs}
+                    maxHeight={328}
+                    profileLink={MainPanels.PROFILE}
+                    goProfile={openProfile} />
+            </Group>
         </HorizontalScroll>,
-        [sGIds, sGs, openProfile]);
+        [sGIds, sGs, myGoal, data, openProfile]);
 
     const createGoalView = useMemo(() => (!!data) && (data?.startedGoalId === false) &&
         <FixedLayout vertical="bottom">
