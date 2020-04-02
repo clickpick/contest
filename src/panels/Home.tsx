@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import cn from 'classnames';
 
 import { PanelPrimary } from '../types/props';
@@ -19,8 +19,8 @@ export interface HomeProps extends PanelPrimary {
 
 const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
     const { pending, data } = useUser();
-    const { goalIds, goals } = useGoals();
-    const { goalIds: sGIds, goals: sGs } = useStartedGoals();
+    const { goalIds, goals, selectedGoal, setGoal } = useGoals();
+    const { goalIds: sGIds, goals: sGs } = useStartedGoals(true);
 
     const openProfile = useCallback((e: any) => {
         const goalId = e.currentTarget.dataset.goalId;
@@ -42,20 +42,6 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
             onClick={openProfile} />,
         [pending, data, openProfile]);
 
-    const [selectedGoalId, setGoalId] = useState<number | null>(null);
-
-    const setGoal = useCallback((e: any) => {
-        const catId = Number(e.target.dataset.catId);
-
-        if (isNaN(catId)) {
-            return;
-        }
-
-        setGoalId(catId);
-    }, []);
-
-    const resetGoal = useCallback(() => setGoalId(null), []);
-
     const goalView = useCallback((id: number, index: number, array: any[]) =>
         <div
             key={id}
@@ -67,11 +53,11 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
                 priority="secondary"
                 size="small"
                 children={goals[id].title}
-                aria-pressed={selectedGoalId === id}
-                data-cat-id={id}
+                aria-pressed={selectedGoal === id}
+                data-goal-id={id}
                 onClick={setGoal} />
         </div>,
-        [goals, selectedGoalId, setGoal]);
+        [goals, selectedGoal, setGoal]);
 
     const goalsView = useMemo(() => (Array.isArray(goalIds)) &&
         <HorizontalScroll className="margin-pink--top margin-pink--bottom">
@@ -81,13 +67,23 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
                         priority="secondary"
                         size="small"
                         children="Все люди"
-                        aria-pressed={selectedGoalId === null}
-                        onClick={resetGoal} />
+                        aria-pressed={selectedGoal === 'all'}
+                        data-goal-id="all"
+                        onClick={setGoal} />
+                </div>
+                <div className="padding-yellow--right">
+                    <Button
+                        priority="secondary"
+                        size="small"
+                        children="Друзья"
+                        aria-pressed={selectedGoal === 'friends'}
+                        data-goal-id="friends"
+                        onClick={setGoal} />
                 </div>
                 {goalIds.map(goalView)}
             </Group>
         </HorizontalScroll>,
-        [goalIds, selectedGoalId, goalView, resetGoal]);
+        [goalIds, selectedGoal, goalView, setGoal]);
 
     const sGView = useMemo(() => (Array.isArray(sGIds)) &&
         <HorizontalScroll className="padding-black--bottom">
@@ -114,7 +110,6 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
             {goalsView}
             {sGView}
             {createGoalView}
-
         </Panel>
     );
 };
