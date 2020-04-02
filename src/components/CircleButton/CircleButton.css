@@ -56,7 +56,7 @@ a.CircleButton {
 }
 
 .CircleButton__icon svg {
-    fill: #000;
+    fill: rgb(var(--color));
 }
 
 /* priority */
