@@ -31,4 +31,7 @@ body[scheme="bright_light"] {
     --reply: #000;
 
     --color: 0, 0, 0;
+
+    /* other */
+    --bar: rgba(0, 0, 0, 0.05)
 }

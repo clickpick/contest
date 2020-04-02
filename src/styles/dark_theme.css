@@ -31,4 +31,7 @@ body[scheme="space_gray"] {
     --reply: #FFF;
 
     --color: 255, 255, 255;
+
+    /* other */
+    --bar: rgba(255, 255, 255, 0.1)
 }
