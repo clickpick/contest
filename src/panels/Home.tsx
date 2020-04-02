@@ -32,7 +32,7 @@ const Home: FC<HomeProps> = ({ id, goForward, createGoal }: HomeProps) => {
         const goalId = e.currentTarget.dataset.goalId;
 
         if (Boolean(goalId)) {
-            window.location.search = window.location.search + '#goal=' + goalId;
+            window.history.pushState('', '', '#goal=' + goalId);
         }
 
         goForward(e);
