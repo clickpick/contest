@@ -21,8 +21,6 @@ import Button from '../components/Button';
 import CircleButton from '../components/CircleButton';
 import Statistics from '../components/Statistics';
 
-// @ts-ignore
-import Icon56AddCircleOutline from '@vkontakte/icons/dist/56/add_circle_outline';
 import { ReactComponent as IconUnion } from '../svg/union.svg';
 import { ReactComponent as IconSettings } from '../svg/settings.svg';
 import { ReactComponent as IconHeart } from '../svg/heart.svg';
@@ -145,7 +143,7 @@ const Profile: FC<ProfileProps> = ({ id, goBack, createGoal }: ProfileProps) => 
                 </Group>
             </>
         );
-    }, [data, goals, loadPhoto, postStory, like]);
+    }, [data, goals, loadPhoto, postStory, like, createGoal]);
 
     return (
         <Panel id={id} separator={false}>
