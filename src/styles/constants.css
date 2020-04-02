@@ -67,5 +67,7 @@ body {
     /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
     background-color: var(--background);
+    --background_content: var(--background);
+    --header_background: var(--background);
     color: rgb(var(--color));
 }
