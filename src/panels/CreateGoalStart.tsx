@@ -5,7 +5,7 @@ import { CreateGoalPanels } from '../types/panels';
 
 import useGoals from '../hooks/use-goals';
 
-import { Panel, PanelHeaderSimple } from '@vkontakte/vkui';
+import { Panel, PanelHeaderSimple, PanelHeaderClose } from '@vkontakte/vkui';
 import Group from '../components/Group';
 import Emoji from '../components/Emoji';
 import Title from '../components/Title';
@@ -14,9 +14,10 @@ import Cell from '../components/Cell';
 
 export interface CreateGoalStartProps extends PanelPrimary {
     setGoal(e: any): void
+    goMain(): void
 }
 
-const CreateGoalStart: FC<CreateGoalStartProps> = ({ id, goForward, setGoal }: CreateGoalStartProps) => {
+const CreateGoalStart: FC<CreateGoalStartProps> = ({ id, goForward, setGoal, goMain }: CreateGoalStartProps) => {
     const { goalIds, goals } = useGoals();
 
     const goalView = useCallback((id) =>
@@ -39,7 +40,7 @@ const CreateGoalStart: FC<CreateGoalStartProps> = ({ id, goForward, setGoal }: C
 
     return (
         <Panel id={id} separator={false}>
-            <PanelHeaderSimple separator={false} />
+            <PanelHeaderSimple left={<PanelHeaderClose onClick={goMain} />} separator={false} />
             <Group vertical center className="margin-pink--top margin-pink--bottom">
                 <Emoji className="margin-purple--bottom margin-purple--left" size="large" children="🎯" />
                 <Title className="margin-aqua--bottom">Сфокусируйся</Title>
@@ -49,8 +50,6 @@ const CreateGoalStart: FC<CreateGoalStartProps> = ({ id, goForward, setGoal }: C
             </Group>
 
             {bodyView}
-
-            <button onClick={goForward} data-to={CreateGoalPanels.FINISH}>finish</button>
         </Panel>
     );
 };

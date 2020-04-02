@@ -58,7 +58,8 @@ const CreateGoal: FC<CreateGoalProps> = ({ id, goMain }: CreateGoalProps) => {
             <CreateGoalStart
                 id={CreateGoalPanels.START}
                 goForward={createGoalView.goForward}
-                setGoal={setGoal} />
+                setGoal={setGoal}
+                goMain={goMain} />
             <CreateGoalFinish
                 id={CreateGoalPanels.FINISH}
                 goalId={selectedGoalId}
