@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { getEntitiesStartedGoalsWithGoalSelector } from './started-goals';
 import {
     ActionTypes,
-    User, UserWithGoal, UserState, UserWithGoalState, StartedGoalsWithGoal,
+    User, UserWithGoal, UserState,
     UserAuthLoad, UserAuthSuccess, UserAuthFailure, StartedGoalCreated
 } from '../types/store';
 import { AppState } from './index';
