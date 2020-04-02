@@ -27,7 +27,7 @@ import { ReactComponent as IconVk } from '../svg/vk.svg';
 
 const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
     const { data } = useUser();
-    const { goals, loadPhoto } = useStartedGoals();
+    const { goals, loadPhoto, like } = useStartedGoals();
 
     const goalId = useRef<string | null>(getHashParam(window.location.href, 'goal'));
     const isMe = useRef(goalId.current === null || Number(goalId.current) === data?.startedGoalId);
@@ -66,7 +66,7 @@ const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
         </>;
 
         const actionsView = (isMe.current)
-            ? <Group jcCenter className="margin-pink--bottom">
+            ? <Group start jcCenter className="margin-pink--bottom">
                 {(startedGoal.needPhoto) &&
                     <PhotoLoad
                         className="margin-purple--right"
@@ -85,12 +85,14 @@ const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
                     Настроить<br />цели (soon)
                 </CircleButton>
             </Group>
-            : <Group className="margin-pink--bottom">
+            : <Group start jcCenter className="margin-pink--bottom">
                 <CircleButton
                     className="margin-purple--right"
                     priority="danger"
                     aria-pressed={startedGoal.isLiked}
-                    icon={<IconHeart />}>
+                    icon={<IconHeart />}
+                    data-goal-id={startedGoal.id}
+                    onClick={like}>
                     {(startedGoal.isLiked) ? 'Спасибо!' : <>Мотивировать<br />лайком!</>}
                 </CircleButton>
                 <CircleButton
@@ -120,7 +122,7 @@ const Profile: FC<PanelSecondary> = ({ id, goBack }: PanelSecondary) => {
                 </Group>
             </>
         );
-    }, [data, goals, loadPhoto, postStory]);
+    }, [data, goals, loadPhoto, postStory, like]);
 
     return (
         <Panel id={id} separator={false}>
