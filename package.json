@@ -14,7 +14,7 @@
     "@vkontakte/vk-bridge": "^2.1.5",
     "@vkontakte/vk-mini-apps-api": "^0.6.4",
     "@vkontakte/vkui": "^3.5.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "core-js": "^3.6.4",
     "humps": "^2.0.1",
